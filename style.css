@@ -8,9 +8,57 @@ a{
     text-decoration: none;
 }
 
+
+/* Variable Decleration */
+:root{
+    --primaryColor1:#4B49AC;
+    --primaryColor2:#98BDFF;
+    --supportColor1: #7DA0FA;
+    --supportColor2: #7978E9;
+    --supportColor1: #F3797E;
+    --black: #000;
+    --white: #FFF;
+}
+
+
+/* Font Decleration */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+}
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+
 /* Header CSS */
+header{
+    background: var(--primaryColor2);
+    padding:15px 30px;
+}
+.navSec{
+    display:flex;
+    justify-content:space-between;
+    align-items: center;
+}
 .navigation{
     display:flex;
     list-style: none;
-
+    align-items: center;
+}
+.navigation li{
+    margin: 0 10px;
+}
+.navigation li a{
+    font-size: 16px;
+}
+.login{
+    font-size: 18px;
+    padding: 5px 30px;
+    border-radius: 0px 15px;
+    background: var(--primaryColor1);
+    border: 1px solid black;
+}
+.login a{
+    font-weight: bold;
+    color: white !important;
 }
