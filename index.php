@@ -1,3 +1,4 @@
+<!-- Include Header -->
 <?php
     include_once "inc_header.php";
 ?>
@@ -7,7 +8,7 @@
             background-image:url("images/BG Image.jpg");
             background-size:cover;
             background-position:center;
-            height:100vh;
+            height:90vh;
             display:flex;
             justify-content:center;
             align-items:center;
@@ -67,6 +68,7 @@
         }
     </style>
 
+    <!-- Home Page Design <-Start->-->
 
     <section class="homeSec">
         <div class="img">
@@ -80,6 +82,8 @@
             </form>
         </div>
     </section>
+
+    <!-- Home Page Design <-End->-->
 
 </body>
 </html>
