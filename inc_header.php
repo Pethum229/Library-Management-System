@@ -13,9 +13,9 @@
         <div class="navSec">
             <ul class="navigation">
                 <li><a href="index.php">Home</a></li>
-                <li><a href="">Book Inventory</a></li>
-                <li><a href="">About Us</a></li>
-                <li><a href="">Contact Us</a></li>
+                <li><a href="book_inventory.php">Book Inventory</a></li>
+                <li><a href="about_us.php">About Us</a></li>
+                <li><a href="contact_us.php">Contact Us</a></li>
             </ul>
             <button class="login"><a href="">Login <i class="fa-solid fa-right-to-bracket"></i></a></button>
         </div>

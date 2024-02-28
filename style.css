@@ -15,9 +15,10 @@ a{
     --primaryColor2:#98BDFF;
     --supportColor1: #7DA0FA;
     --supportColor2: #7978E9;
-    --supportColor1: #F3797E;
+    --supportColor3: #F3797E;
     --black: #000;
     --white: #FFF;
+    --placeholder: gray;
 }
 
 
