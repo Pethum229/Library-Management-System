@@ -122,14 +122,18 @@
                 <td><?php echo $row['BookName']; ?></td>
                 <td><?php echo $row['AuthorName']; ?></td>
                 <td><?php echo $row['Quantity']; ?></td>
-                <td><a href="#" class="btn btn-info btn-sm view_data">View</a></td>
+                <td>
+                  <a href="#" class="btn btn-info btn-sm viewData">View</a>
+                  <a href="#" class="btn btn-success btn-sm editData">Edit</a>
+                  <a href="#" class="btn btn-danger btn-sm deleteData">Delete</a>
+                </td>
               </tr>
 
               <?php
             }
           }else{
             ?>
-              <tr colspan="9">No Record Found</tr>
+              <tr colspan="6">No Record Found</tr>
             <?php
           }
         ?>
@@ -143,10 +147,12 @@
     include_once "../admin_layout_end.php";
 ?>
 
-<!-- View Data Popup Model -->
 <script>
+
+  // View Data Popup Model
+
   $(document).ready(function(){
-    $('.view_data').click(function(e){
+    $('.viewData').click(function(e){
       e.preventDefault();
 
       // console.log("Hello");
@@ -171,4 +177,34 @@
 
     });
   });
+
+  // Edit Data Popup Model
+ 
+  $(document).ready(function(){
+    $('.editData').click(function(e){
+      e.preventDefault();
+
+      // console.log("Hello");
+      var isbn = $(this).closest('tr').find('.isbn').text();
+      console.log(isbn);
+
+      // $.ajax({
+      //   method: "POST",
+      //   url: "book_view.php",
+      //   data: {
+      //     'click_view_btn': true,
+      //     'isbn':isbn,
+      //   },
+      //   success: function(response){
+      //     // console.log(response);
+
+      //     $('.viewBook').html(response);
+      //     $('#viewBookModal').modal('show');
+
+      //   }
+      // });
+
+    });
+  });
+
 </script>
