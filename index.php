@@ -1,6 +1,6 @@
 <!-- Include Header -->
 <?php
-    include_once "inc_header.php";
+    include_once "Common/inc_header.php";
 ?>
     <style>
         .homeSec{

@@ -1,14 +1,18 @@
 <!-- Include Header -->
 <?php
-    include_once "inc_header.php";
+    include_once "Common/inc_header.php";
 ?>
 
     <style>
+        .filterSec{
+            display:flex;
+        }
         .filter{
             background:var(--primaryColor2);
             width:25%;
             padding:20px 30px;
-            height:90vh;
+            height:100vh;
+            position:fixed;
         }
         .filter h1{
             text-align:center;
@@ -63,11 +67,46 @@
             height:1px;
             border:none;
         }
+        .card img{
+            width:200px;
+        }
+        .books{
+            width:75%;
+            padding:40px;
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:space-between;
+            margin-left:calc(100% - 75%);
+        }
+        .card{
+            background:var(--placeholder);
+            padding:5px;
+            text-align:center;
+            margin:30px 10px;
+            width:250px;
+            border-radius:15px;
+        }
+        .details h2{
+            font-size:20px;
+            /* color:var(--primaryColor1); */
+        }
+        .details h3{
+            font-size:15px;
+        }
+        .card button{
+            padding:2px 10px;
+            margin:7px 0;
+            background:var(--supportColor2);
+            border:1px solid black;
+        }
+        .card button a{
+            color:var(--black);
+        }
     </style>
 
 <!-- Design Book Inventory Page <-Start-> -->
 
-    <section>
+    <section class="filterSec">
         <div class="filter">
             <h1>Filter Your Book</h1>
             <form>
@@ -131,7 +170,87 @@
             </form>
         </div>
         <div class="books">
-
+            <div class="card">
+                <img src="images/1.jpg" alt="Book 1">
+                <div class="details">
+                    <h2>REPEAT</h2>
+                    <h3>(Kyliee Scott)</h3>
+                    <h3>ISBN 0-670-01039-1</h3>
+                </div>
+                <button><a href="">Borrow</a></button>
+            </div>
+            <div class="card">
+                <img src="images/2.jpg" alt="Book 1">
+                <div class="details">
+                    <h2>REPEAT</h2>
+                    <h3>(Kyliee Scott)</h3>
+                    <h3>ISBN 0-670-01039-1</h3>
+                </div>
+                <button><a href="">Borrow</a></button>
+            </div>
+            <div class="card">
+                <img src="images/3.jpg" alt="Book 1">
+                <div class="details">
+                    <h2>REPEAT</h2>
+                    <h3>(Kyliee Scott)</h3>
+                    <h3>ISBN 0-670-01039-1</h3>
+                </div>
+                <button><a href="">Borrow</a></button>
+            </div>
+            <div class="card">
+                <img src="images/4.jpg" alt="Book 1">
+                <div class="details">
+                    <h2>REPEAT</h2>
+                    <h3>(Kyliee Scott)</h3>
+                    <h3>ISBN 0-670-01039-1</h3>
+                </div>
+                <button><a href="">Borrow</a></button>
+            </div>
+            <div class="card">
+                <img src="images/1.jpg" alt="Book 1">
+                <div class="details">
+                    <h2>REPEAT</h2>
+                    <h3>(Kyliee Scott)</h3>
+                    <h3>ISBN 0-670-01039-1</h3>
+                </div>
+                <button><a href="">Borrow</a></button>
+            </div>
+            <div class="card">
+                <img src="images/5.jpg" alt="Book 1">
+                <div class="details">
+                    <h2>REPEAT</h2>
+                    <h3>(Kyliee Scott)</h3>
+                    <h3>ISBN 0-670-01039-1</h3>
+                </div>
+                <button><a href="">Borrow</a></button>
+            </div>
+            <div class="card">
+                <img src="images/6.jpg" alt="Book 1">
+                <div class="details">
+                    <h2>REPEAT</h2>
+                    <h3>(Kyliee Scott)</h3>
+                    <h3>ISBN 0-670-01039-1</h3>
+                </div>
+                <button><a href="">Borrow</a></button>
+            </div>
+            <div class="card">
+                <img src="images/7.jpg" alt="Book 1">
+                <div class="details">
+                    <h2>REPEAT</h2>
+                    <h3>(Kyliee Scott)</h3>
+                    <h3>ISBN 0-670-01039-1</h3>
+                </div>
+                <button><a href="">Borrow</a></button>
+            </div>
+            <div class="card">
+                <img src="images/8.jpg" alt="Book 1">
+                <div class="details">
+                    <h2>REPEAT</h2>
+                    <h3>(Kyliee Scott)</h3>
+                    <h3>ISBN 0-670-01039-1</h3>
+                </div>
+                <button><a href="">Borrow</a></button>
+            </div>
         </div>
     </section>
 

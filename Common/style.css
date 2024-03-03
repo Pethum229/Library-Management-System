@@ -51,6 +51,10 @@ header{
 .navigation li a{
     font-size: 16px;
 }
+.navSec button{
+    border: none;
+    background: transparent;
+}
 .login{
     font-size: 18px;
     padding: 5px 30px;
