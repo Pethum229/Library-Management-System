@@ -1,36 +1,37 @@
 <!-- Include Header -->
 <?php
-    include_once "Common/inc_header.php";
+    include_once "../Common/inc_header.php";
 ?>
+
     <style>
-        .loginSec{
+        .registerSec{
             display:flex;
             align-items:center;
             justify-content:center;
             height:100vh;
         }
-        .loginForm{
+        .registerForm{
             display:flex;
             flex-direction:column;
             align-items:center;
             justify-content:center;
         }
-        .loginForm input{
+        .registerForm input,select{
             margin-bottom:20px;
         }
-
     </style>
 
-    <section class="loginSec">
+    <section class="registerSec">
         <div>
-            <form class="loginForm">
+            <form class="registerForm" action="user_register.php" method="POST">
+                <input type="text" placeholder="Name">
                 <input type="text" placeholder="Email">
                 <input type="password" placeholder="Password">
-                <input type="submit" value="Login">
+                <input type="password" placeholder="Confirm Password">
+                <input type="submit" name="register" value="Register">
             </form>
             <div>
-                <p>Forgot Username or Password? <a href="#">Click Here</a></p>
-                <p>Don't have an account? <a href="register.php">Register</a></p>
+                <p>Already have an account? <a href="login.php">Login</a></p>
             </div>
         </div>
     </section>

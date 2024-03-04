@@ -12,12 +12,11 @@
     <title>Admin Portal</title>
 </head>
 <body>
-
     <section>
         <div>
-            <button><a href="">Dashboard</a></button>
-            <button><a href="">Manage Books</a></button>
-            <button><a href="">Manage Users</a></button>
-            <button><a href="">Lending Transactions</a></button>
+            <button><a href="/Library-Management-System/Admin Portal/dashboard.php">Dashboard</a></button>
+            <button><a href="/Library-Management-System/Admin Portal/Manage Books/books.php">Manage Books</a></button>
+            <button><a href="/Library-Management-System/Admin Portal/Manage Users/users.php">Manage Users</a></button>
+            <button><a href="/Library-Management-System/Admin Portal/Lending Transactions/transactions.php">Lending Transactions</a></button>
         </div>
     </section>
