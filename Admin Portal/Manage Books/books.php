@@ -137,6 +137,30 @@
     </div>
 
 
+    <!-- Delete Book Details Modal -->
+
+    <div class="modal fade" id="deleteBookModal" tabindex="-1" aria-labelledby="deleteBookModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="deleteBookModalLabel">Delete Book</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form action="book_delete.php" method="POST">
+            <input type="hidden" class="form-control" name="isbn" id="deleteId">
+            <div class="modal-body">
+              <h4>Are you sure, You want to delete this Book?</h4>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" name="deleteBook" class="btn btn-danger">Yes! Delete Book</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
     <!-- Fetch Data From Database -->
 
     <table class="table table-striped table-bordered table-danger">
@@ -263,26 +287,28 @@
   });
 
 
-  // Delete Data Model
+  // Delete Data Popup Model
 
   $(document).ready(function (){
     $('.deleteData').click(function(e){
       e.preventDefault();
       
       var isbn = $(this).closest('tr').find('.isbn').text();
+      $('#deleteId').val(isbn);
+      $('#deleteBookModal').modal('show');
 
       $.ajax({
         method: "POST",
         url: "book_delete.php",
-        data: {
-          'click_delete_btn': true,
-          'isbn' :isbn,
+        data:{
+          'delete_btn':true,
+          'isbn':isbn,
         },
-        success: function (response){
+        success:function (response){
           console.log(response);
-          window.location.reload();
         }
-      })
+      });
+
     });
   });
 
