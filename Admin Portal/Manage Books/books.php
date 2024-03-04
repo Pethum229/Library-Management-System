@@ -23,13 +23,11 @@
       Add New Book
     </button>
 
-    <!-- Modal -->
+    <!-- Add New Book -->
+
     <div class="modal fade" id="insertData" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="insertDataLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
-
-          <!-- Add New Book -->
-
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="insertDataLabel">Add New Book</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -70,6 +68,7 @@
       </div>
     </div>
 
+
     <!-- View Book Details Modal -->
 
     <div class="modal fade" id="viewBookModal" tabindex="-1" aria-labelledby="viewBookModalLabel" aria-hidden="true">
@@ -90,6 +89,53 @@
         </div>
       </div>
     </div>
+
+
+    <!-- Edit Book -->
+
+    <div class="modal fade" id="editData" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editDataLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="editDataLabel">Edit Book</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form action="book_edit.php" method="POST" enctype="multipart/form-data">
+            <div class="modal-body">
+              <div class="form-group mb-3">
+                  <input type="text" class="form-control" id="bookName" name="bookName" placeholder="Book Name">
+              </div>
+              <div class="form-group mb-3">
+                  <input type="text" class="form-control" id="authorName"  name="authorName" placeholder="Author Name">
+              </div>
+              <div class="form-group mb-3">
+                  <input type="text" class="form-control" id="isbn" name="ISBN">
+              </div>
+              <div class="form-group mb-3">
+                  <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Quantity">
+              </div>
+              <div class="form-group mb-3">
+                  <input type="text" class="form-control" id="publicYear" name="publicYear" placeholder="Publication Year">
+              </div>
+              <div class="form-group mb-3">
+                  <input type="text" class="form-control" id="genre" name="genre" placeholder="Genre">
+              </div>
+              <div class="form-group mb-3">
+                  <input type="text" class="form-control" id="summary" name="summary" placeholder="Summary">
+              </div>
+              <div class="form-group mb-3">
+                  <input type="file" class="form-control" id="image" name="image">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" name="updateBook" class="btn btn-primary">Update Book</button>
+            </div>
+        </form>
+        </div>
+      </div>
+    </div>
+
 
     <!-- Fetch Data From Database -->
 
@@ -155,7 +201,6 @@
     $('.viewData').click(function(e){
       e.preventDefault();
 
-      // console.log("Hello");
       var isbn = $(this).closest('tr').find('.isbn').text();
       // console.log(isbn);
 
@@ -184,26 +229,60 @@
     $('.editData').click(function(e){
       e.preventDefault();
 
-      // console.log("Hello");
       var isbn = $(this).closest('tr').find('.isbn').text();
       console.log(isbn);
 
-      // $.ajax({
-      //   method: "POST",
-      //   url: "book_view.php",
-      //   data: {
-      //     'click_view_btn': true,
-      //     'isbn':isbn,
-      //   },
-      //   success: function(response){
-      //     // console.log(response);
+      $.ajax({
+        method: "POST",
+        url: "book_edit.php",
+        data: {
+          'click_edit_btn': true,
+          'isbn':isbn,
+        },
+        success: function(response){
+          // console.log(response);
 
-      //     $('.viewBook').html(response);
-      //     $('#viewBookModal').modal('show');
+          $.each(response, function(Key, value){
+            // console.log(value['BookName']);
 
-      //   }
-      // });
+            $('#bookName').val(value['BookName']);
+            $('#authorName').val(value['AuthorName']);
+            $('#isbn').val(value['ISBN']);
+            $('#quantity').val(value['Quantity']);
+            $('#publicYear').val(value['PublicYear']);
+            $('#genre').val(value['Genre']);
+            $('#summary').val(value['Summary']);
 
+          });
+
+          $('#editData').modal('show');
+        }
+      });
+
+    });
+  });
+
+
+  // Delete Data Model
+
+  $(document).ready(function (){
+    $('.deleteData').click(function(e){
+      e.preventDefault();
+      
+      var isbn = $(this).closest('tr').find('.isbn').text();
+
+      $.ajax({
+        method: "POST",
+        url: "book_delete.php",
+        data: {
+          'click_delete_btn': true,
+          'isbn' :isbn,
+        },
+        success: function (response){
+          console.log(response);
+          window.location.reload();
+        }
+      })
     });
   });
 

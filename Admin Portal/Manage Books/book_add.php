@@ -15,13 +15,13 @@ if(isset($_POST['addBook'])){
     $folder = 'Images/'.$fileName;
 
 
-// Move uploaded file to destination folder
-if (!move_uploaded_file($tempName, $folder)) {
-    $error = error_get_last();
-    $_SESSION['status'] = "Failed to upload image. Error: " . $error['message'];
-    header("location:books.php");
-    exit;
-}
+    // Move uploaded file to destination folder
+    if (!move_uploaded_file($tempName, $folder)) {
+        $error = error_get_last();
+        $_SESSION['status'] = "Failed to upload image. Error: " . $error['message'];
+        header("location:books.php");
+        exit;
+    }
 
 
     include_once "../../Common/db_connection.php";
@@ -33,6 +33,7 @@ if (!move_uploaded_file($tempName, $folder)) {
         $_SESSION['status'] = "Book added successfully";
         header("location:books.php");
         exit;
+        
     } catch (PDOException $e) {
         $_SESSION['status'] = "Insertion of book failed: " . $e->getMessage();
         header("location:books.php");
