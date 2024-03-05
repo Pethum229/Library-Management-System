@@ -24,10 +24,10 @@
     <section class="registerSec">
         <div>
             <form class="registerForm" action="user_register.php" method="POST">
-                <input type="text" placeholder="Name">
-                <input type="text" placeholder="Email">
-                <input type="password" placeholder="Password">
-                <input type="password" placeholder="Confirm Password">
+                <input type="text" name="userName" placeholder="Name">
+                <input type="text" name="email" placeholder="Email">
+                <input type="password" name="password" placeholder="Password">
+                <input type="password" name="cPassword" placeholder="Confirm Password">
                 <input type="submit" name="register" value="Register">
             </form>
             <div>

@@ -23,10 +23,10 @@
 
     <section class="loginSec">
         <div>
-            <form class="loginForm">
-                <input type="text" placeholder="Email">
-                <input type="password" placeholder="Password">
-                <input type="submit" value="Login">
+            <form action="user_login.php" method="POST" class="loginForm">
+                <input type="text" name="email" placeholder="Email">
+                <input type="password" name="password" placeholder="Password">
+                <input type="submit" name="login" value="Login">
             </form>
             <div>
                 <p>Forgot Username or Password? <a href="#">Click Here</a></p>

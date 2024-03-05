@@ -163,14 +163,14 @@
 
     <!-- Fetch Data From Database -->
 
-    <table class="table table-striped table-bordered table-danger">
+    <table class="table table-bordered table-danger">
       <thead>
         <tr>
           <th scope="col">ISBN</th>
           <th scope="col">Book Image</th>
           <th scope="col">Book Name</th>
           <th scope="col">Author Name</th>
-          <th scope="col">Quantity</th>
+          <th scope="col">Avaliable Quantity</th>
           <th scope="col">Actions</th>
         </tr>
       </thead>
@@ -184,14 +184,20 @@
 
           if($fetchBooks->rowCount() > 0){
             while($row=$fetchBooks -> fetch (PDO::FETCH_ASSOC)){
+
+              $allQuantity = $row['Quantity'];
+              $borrowedQuantity = $row['BorrowedQuantity'];
+              $avaliability = $allQuantity - $borrowedQuantity;
+              $trending = ($borrowedQuantity/$allQuantity)*100;
+
               ?>
 
-              <tr>
+              <tr class='<?php if($trending>=75) echo "table-primary"?>'>
                 <td class="isbn"><?php echo $row['ISBN']; ?></td>
                 <td><img src="Images/<?php echo $row['Images']; ?>"  style="width:50px;"></td>
                 <td><?php echo $row['BookName']; ?></td>
                 <td><?php echo $row['AuthorName']; ?></td>
-                <td><?php echo $row['Quantity']; ?></td>
+                <td><?php echo $avaliability; ?></td>
                 <td>
                   <a href="#" class="btn btn-info btn-sm viewData">View</a>
                   <a href="#" class="btn btn-success btn-sm editData">Edit</a>

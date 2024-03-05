@@ -170,87 +170,45 @@
             </form>
         </div>
         <div class="books">
+            
+            <?php
+                include_once "Common/db_connection.php";
+
+                $fetchBooks = $db->prepare("SELECT * FROM books");
+                $fetchBooks->execute(array());
+      
+                if($fetchBooks->rowCount() > 0){
+                  while($row=$fetchBooks -> fetch (PDO::FETCH_ASSOC)){
+
+                    $allQuantity = $row['Quantity'];
+                    $borrowedQuantity = $row['BorrowedQuantity'];
+                    $avaliability = $allQuantity - $borrowedQuantity;
+                    $trending = ($borrowedQuantity/$allQuantity)*100;
+            ?>
+
             <div class="card">
-                <img src="images/1.jpg" alt="Book 1">
+                <img src="Admin Portal/Manage Books/Images/<?php echo $row['Images']; ?>" alt="Book 1">
                 <div class="details">
-                    <h2>REPEAT</h2>
-                    <h3>(Kyliee Scott)</h3>
-                    <h3>ISBN 0-670-01039-1</h3>
+                    <h2><?php echo $row['BookName'] ?></h2>
+                    <h3>(<?php echo $row['AuthorName'] ?>)</h3>
+                    <h3><?php echo $row['ISBN'] ?></h3>
+                    <h3><?php if($avaliability<10 && $avaliability!=0) echo $avaliability." more books only avaliable";?></h3>
+                    <h3><?php if($trending>=75) echo "Trending Book"; ?></h3>
                 </div>
-                <button><a href="">Borrow</a></button>
+                <?php
+                if($avaliability==0){
+                    echo "<button style='background:red'>Not Avaliable</button>";
+                }else{
+                    echo "<button><a href=''>Borrow</a></button>";
+                }
+                ?>
             </div>
-            <div class="card">
-                <img src="images/2.jpg" alt="Book 1">
-                <div class="details">
-                    <h2>REPEAT</h2>
-                    <h3>(Kyliee Scott)</h3>
-                    <h3>ISBN 0-670-01039-1</h3>
-                </div>
-                <button><a href="">Borrow</a></button>
-            </div>
-            <div class="card">
-                <img src="images/3.jpg" alt="Book 1">
-                <div class="details">
-                    <h2>REPEAT</h2>
-                    <h3>(Kyliee Scott)</h3>
-                    <h3>ISBN 0-670-01039-1</h3>
-                </div>
-                <button><a href="">Borrow</a></button>
-            </div>
-            <div class="card">
-                <img src="images/4.jpg" alt="Book 1">
-                <div class="details">
-                    <h2>REPEAT</h2>
-                    <h3>(Kyliee Scott)</h3>
-                    <h3>ISBN 0-670-01039-1</h3>
-                </div>
-                <button><a href="">Borrow</a></button>
-            </div>
-            <div class="card">
-                <img src="images/1.jpg" alt="Book 1">
-                <div class="details">
-                    <h2>REPEAT</h2>
-                    <h3>(Kyliee Scott)</h3>
-                    <h3>ISBN 0-670-01039-1</h3>
-                </div>
-                <button><a href="">Borrow</a></button>
-            </div>
-            <div class="card">
-                <img src="images/5.jpg" alt="Book 1">
-                <div class="details">
-                    <h2>REPEAT</h2>
-                    <h3>(Kyliee Scott)</h3>
-                    <h3>ISBN 0-670-01039-1</h3>
-                </div>
-                <button><a href="">Borrow</a></button>
-            </div>
-            <div class="card">
-                <img src="images/6.jpg" alt="Book 1">
-                <div class="details">
-                    <h2>REPEAT</h2>
-                    <h3>(Kyliee Scott)</h3>
-                    <h3>ISBN 0-670-01039-1</h3>
-                </div>
-                <button><a href="">Borrow</a></button>
-            </div>
-            <div class="card">
-                <img src="images/7.jpg" alt="Book 1">
-                <div class="details">
-                    <h2>REPEAT</h2>
-                    <h3>(Kyliee Scott)</h3>
-                    <h3>ISBN 0-670-01039-1</h3>
-                </div>
-                <button><a href="">Borrow</a></button>
-            </div>
-            <div class="card">
-                <img src="images/8.jpg" alt="Book 1">
-                <div class="details">
-                    <h2>REPEAT</h2>
-                    <h3>(Kyliee Scott)</h3>
-                    <h3>ISBN 0-670-01039-1</h3>
-                </div>
-                <button><a href="">Borrow</a></button>
-            </div>
+
+            <?php
+                }
+            }
+            ?>
+
         </div>
     </section>
 

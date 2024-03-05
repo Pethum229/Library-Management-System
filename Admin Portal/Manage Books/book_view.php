@@ -12,12 +12,18 @@
 
         if($viewBook->rowCount() > 0){
             while($row=$viewBook -> fetch (PDO::FETCH_ASSOC)){
+
+                $allQuantity = $row['Quantity'];
+                $borrowedQuantity = $row['BorrowedQuantity'];
+                $avaliability = $allQuantity - $borrowedQuantity;
+
                 echo '
                 <img src="Images/'.$row['Images'].'">
                 <h6>ISBN : '.$row['ISBN'].'</h6>
                 <h6>Book Name : '.$row['BookName'].'</h6>
                 <h6>Author Name : '.$row['AuthorName'].'</h6>
-                <h6>Quantity : '.$row['Quantity'].'</h6>
+                <h6>All Quantity : '.$row['Quantity'].'</h6>
+                <h6>Avaliable Quantity : '.$avaliability.'</h6>
                 <h6>Public Year : '.$row['PublicYear'].'</h6>
                 <h6>Genre : '.$row['Genre'].'</h6>
                 <h6>Summary : '.$row['Summary'].'</h6>
