@@ -16,9 +16,24 @@ if(isset($_POST['login'])){
             $result = $checkUser->fetch();
 
             if(password_verify($password,$result['Password'])){
-                $_SESSOION['name']=$result['UserName'];
-                header("location:../User Dashboard/dashboard.php");
-                exit();
+                $name = $result['UserName'];
+                $id = $result['ID'];
+                $role = $result['Role'];
+
+                if($role == '0'){
+                    $_SESSION['name']=$name;
+                    $_SESSION['id']=$id;
+                    $_SESSION['role']=$role;
+                    header("location:../User Dashboard/dashboard.php");
+                    exit();
+                }elseif($role == '1'){
+                    $_SESSION['name']=$name;
+                    $_SESSION['id']=$id;
+                    $_SESSION['role']=$role;
+                    header("location:../Admin Portal/dashboard.php");
+                    exit();
+
+                }
             }else{
                 header("location:login.php");
                 exit();

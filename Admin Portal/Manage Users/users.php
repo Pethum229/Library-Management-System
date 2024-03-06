@@ -162,6 +162,7 @@
                 <td>
                   <a href="#" class="btn btn-info btn-sm viewUser">View</a>
                   <a href="#" class="btn btn-success btn-sm editData">Edit</a>
+                  <a href="#" class="btn btn-success btn-sm editData">Mark as book returned</a>
                   <a href="#" class="btn btn-danger btn-sm deleteData">Delete</a>
                 </td>
               </tr>

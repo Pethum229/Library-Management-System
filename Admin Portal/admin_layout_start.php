@@ -18,5 +18,6 @@
             <button><a href="/Library-Management-System/Admin Portal/Manage Books/books.php">Manage Books</a></button>
             <button><a href="/Library-Management-System/Admin Portal/Manage Users/users.php">Manage Users</a></button>
             <button><a href="/Library-Management-System/Admin Portal/Lending Transactions/transactions.php">Lending Transactions</a></button>
+            <button><a href="/Library-Management-System/Login&Register/logout.php">Log Out</a></button>
         </div>
     </section>

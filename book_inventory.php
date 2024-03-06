@@ -199,7 +199,8 @@
                 if($avaliability==0){
                     echo "<button style='background:red'>Not Avaliable</button>";
                 }else{
-                    echo "<button><a href=''>Borrow</a></button>";
+                    $book = $row['ID'];
+                    echo "<button><a href='Page Functions/book_borrow.php?book=$book'>Borrow</a></button>";
                 }
                 ?>
             </div>
