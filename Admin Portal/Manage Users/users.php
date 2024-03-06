@@ -52,8 +52,9 @@
           </div>
           <form action="user_edit.php" method="POST">
             <div class="modal-body">
+              <input type="hidden" class="form-control" id="id" name="id">
               <div class="form-group mb-3">
-                  <input type="text" class="form-control" id="userName" name="userName" placeholder="User Name">
+                <input type="text" class="form-control" id="userName" name="userName" placeholder="User Name">
               </div>
               <div class="form-group mb-3">
                   <input type="text" class="form-control" id="email"  name="email" placeholder="Email">
@@ -69,11 +70,11 @@
                   <select name="subscription" id="subscription">
                     <option value="0">Select New Subscription Package</option>
                     <option value="1">1 Months Package</option>
-                    <option value="1">3 Months Package</option>
-                    <option value="1">6 Months Package</option>
-                    <option value="1">12 Months Package</option>
-                    <option value="1">18 Months Package</option>
-                    <option value="1">24 Months Package</option>
+                    <option value="3">3 Months Package</option>
+                    <option value="6">6 Months Package</option>
+                    <option value="12">12 Months Package</option>
+                    <option value="18">18 Months Package</option>
+                    <option value="24">24 Months Package</option>
                   </select>
               </div>
             </div>
@@ -89,21 +90,21 @@
 
     <!-- Delete Book Details Modal -->
 
-    <div class="modal fade" id="deleteBookModal" tabindex="-1" aria-labelledby="deleteBookModalLabel" aria-hidden="true">
+    <div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserkModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="deleteBookModalLabel">Delete Book</h1>
+            <h1 class="modal-title fs-5" id="deleteUserModalLabel">Delete Book</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <form action="book_delete.php" method="POST">
+          <form action="user_delete.php" method="POST">
             <input type="hidden" class="form-control" name="id" id="deleteId">
             <div class="modal-body">
-              <h4>Are you sure, You want to delete this Book?</h4>
+              <h4>Are you sure, You want to delete this User?</h4>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="submit" name="deleteBook" class="btn btn-danger">Yes! Delete Book</button>
+              <button type="submit" name="deleteUser" class="btn btn-danger">Yes! Delete User</button>
             </div>
           </form>
         </div>
@@ -135,6 +136,8 @@
           if($fetchUsers->rowCount() > 0){
             while($row=$fetchUsers -> fetch (PDO::FETCH_ASSOC)){
 
+                $todayDate = date('Y-m-d');
+
                 $reNewDate = $row['ReNewDate'];
                 $subscription = $row['Subscription'];
                 $nextReNewDate = new DateTime($reNewDate);
@@ -142,7 +145,7 @@
                 $nextDate = $nextReNewDate->format('Y-m-d');
 
                 $date1 = new DateTime($nextDate);
-                $date2 = new DateTime($reNewDate);
+                $date2 = new DateTime($todayDate);
                 $difference = $date1->diff($date2);
 
                 $months = $difference->y*12 + $difference->m;
@@ -227,19 +230,14 @@
           'id':id,
         },
         success: function(response){
-          // console.log(response);
+          console.log(response);
 
           $.each(response, function(Key, value){
             // console.log(value['BookName']);
 
             $('#userName').val(value['UserName']);
             $('#email').val(value['Email']);
-            $('#id').val(value['id']);
-            $('#quantity').val(value['Quantity']);
-            $('#publicYear').val(value['PublicYear']);
-            $('#genre').val(value['Genre']);
-            $('#summary').val(value['Summary']);
-
+            $('#id').val(value['ID']);
           });
 
           $('#editUser').modal('show');
@@ -258,11 +256,11 @@
       
       var id = $(this).closest('tr').find('.id').text();
       $('#deleteId').val(id);
-      $('#deleteBookModal').modal('show');
+      $('#deleteUserModal').modal('show');
 
       $.ajax({
         method: "POST",
-        url: "book_delete.php",
+        url: "user_delete.php",
         data:{
           'delete_btn':true,
           'id':id,

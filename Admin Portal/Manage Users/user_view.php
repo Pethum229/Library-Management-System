@@ -12,6 +12,8 @@
         if($viewUser->rowCount() > 0){
             while($row=$viewUser -> fetch (PDO::FETCH_ASSOC)){
 
+                $todayDate = date('Y-m-d');
+
                 $reNewDate = $row['ReNewDate'];
                 $subscription = $row['Subscription'];
                 $nextReNewDate = new DateTime($reNewDate);
@@ -19,7 +21,7 @@
                 $nextDate = $nextReNewDate->format('Y-m-d');
 
                 $date1 = new DateTime($nextDate);
-                $date2 = new DateTime($reNewDate);
+                $date2 = new DateTime($todayDate);
                 $difference = $date1->diff($date2);
 
                 $months = $difference->y*12 + $difference->m;
