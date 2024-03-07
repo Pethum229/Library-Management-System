@@ -112,6 +112,30 @@
     </div>
 
 
+    <!-- Book Return Confirmation Modal -->
+
+    <div class="modal fade" id="bookReturnModal" tabindex="-1" aria-labelledby="bookReturnModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="bookReturnModalLabel">Return Book</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form action="book_return.php" method="POST">
+            <input type="hidden" class="form-control" name="id" id="returnId">
+            <div class="modal-body">
+              <h4>User returnd the book?</h4>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" name="returnBook" class="btn btn-danger">Yes!</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
     <!-- Fetch Data From Database -->
 
     <table class="table table-bordered table-danger">
@@ -162,7 +186,7 @@
                 <td>
                   <a href="#" class="btn btn-info btn-sm viewUser">View</a>
                   <a href="#" class="btn btn-success btn-sm editData">Edit</a>
-                  <a href="#" class="btn btn-success btn-sm editData">Mark as book returned</a>
+                  <a href="#" class="btn btn-success btn-sm returnBook">Mark as book returned</a>
                   <a href="#" class="btn btn-danger btn-sm deleteData">Delete</a>
                 </td>
               </tr>
@@ -264,6 +288,32 @@
         url: "user_delete.php",
         data:{
           'delete_btn':true,
+          'id':id,
+        },
+        success:function (response){
+          console.log(response);
+        }
+      });
+
+    });
+  });
+
+
+  // Return Book Popup Model
+
+  $(document).ready(function (){
+    $('.returnBook').click(function(e){
+      e.preventDefault();
+      
+      var id = $(this).closest('tr').find('.id').text();
+      $('#returnId').val(id);
+      $('#bookReturnModal').modal('show');
+
+      $.ajax({
+        method: "POST",
+        url: "book_return.php",
+        data:{
+          'return_btn':true,
           'id':id,
         },
         success:function (response){

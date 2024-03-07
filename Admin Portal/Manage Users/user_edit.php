@@ -13,9 +13,6 @@
 
         if($editUser->rowCount() > 0){
             while($row=$editUser -> fetch (PDO::FETCH_ASSOC)){
-                $reNewDate = $row['ReNewDate'];
-                $subscription = $row['Subscription'];
-                $encryptPwd = $row['Password'];
 
                 array_push($arrayResult, $row);
                 header('content-type:application.json');
