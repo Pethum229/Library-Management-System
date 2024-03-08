@@ -124,7 +124,15 @@
           <form action="book_return.php" method="POST">
             <input type="hidden" class="form-control" name="id" id="returnId">
             <div class="modal-body">
-              <h4>User returnd the book?</h4>
+              <h4>User returnd the correct book?</h4>
+              <div>
+                <h6 id="bookName"></h6>
+                <h6 id="bookIsbn"></h6>
+                <h6 id="borrowDate"></h6>
+                <h6 id="deadline"></h6>
+                <h6 id="lateDate"></h6>
+                <h6 id="fine"></h6>
+              </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -186,7 +194,11 @@
                 <td>
                   <a href="#" class="btn btn-info btn-sm viewUser">View</a>
                   <a href="#" class="btn btn-success btn-sm editData">Edit</a>
-                  <a href="#" class="btn btn-success btn-sm returnBook">Mark as book returned</a>
+                  <?php
+                  if($row['BBStatus']=="1"){
+                    echo "<a href='#' class='btn btn-success btn-sm returnBook'>Mark as book returned</a>";
+                  }
+                  ?>
                   <a href="#" class="btn btn-danger btn-sm deleteData">Delete</a>
                 </td>
               </tr>
@@ -318,10 +330,27 @@
         },
         success:function (response){
           console.log(response);
+
+          // Check if the response is a valid object
+          if (typeof response === 'object') {
+            // Access the properties of the response object
+            $('#bookName').text('Book Name: ' + response['BookName']);
+            $('#bookIsbn').text('Book ISBN: ' + response['UserID']);
+            $('#borrowDate').text('Borrow Date: ' + response['TransactionDate']);
+            $('#deadline').text('Deadline: ' + response['Deadline']);
+            $('#lateDate').text('Late Date: ' + response['LateDate']);
+            $('#fine').text('Fine: ' + response['Fine']);
+          } else {
+            console.error('Invalid JSON response:', response);
+          }
+        },
+        error: function(xhr, status, error) {
+          console.error('AJAX error:', error);
         }
       });
 
     });
-  });
+});
+
 
 </script>
