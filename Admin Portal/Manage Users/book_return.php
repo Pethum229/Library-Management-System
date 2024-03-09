@@ -7,7 +7,7 @@ if(isset($_POST['return_btn'])){
     $id = $_POST['id'];
     $arrayResult = [];
 
-    $lastTransaction =  $db->prepare("SELECT transactions.*, books.BookName FROM transactions 
+    $lastTransaction =  $db->prepare("SELECT transactions.*, books.* FROM transactions 
                                             JOIN books ON transactions.BookID = books.ID
                                                     WHERE transactions.UserID = ?
                                                                 ORDER BY transactions.ID DESC LIMIT 1");
@@ -56,14 +56,27 @@ if(isset($_POST['returnBook'])){
     $id = $_POST['id'];
 
     try{
-        $returnBook = $db->prepare("UPDATE users SET BBStatus=?");
-        $returnBook->execute(array('0'));
+        $returnBook = $db->prepare("UPDATE users SET BBStatus=? WHERE ID=?");
+        $returnBook->execute(array('0',$id));
 
-        $_SESSION['status'] = "Successfully updated user";
-        header("location:users.php");
-        exit();
+        $transactionUpdate = $db->prepare("UPDATE transactions SET Status=? WHERE UserID=? AND Status=?");
+        $transactionUpdate->execute(array('0',$id,'1'));
 
-    } catch (PDOException $e) {
+        $updatedTransaction = $db->prepare("SELECT BookID FROM transactions WHERE UserID=? AND Status=? ORDER BY ID DESC");
+        $updatedTransaction->execute(array($id,'0'));
+        $book = $updatedTransaction->fetch(PDO::FETCH_ASSOC);
+        $bookId = $book['BookID'];
+
+        $updateBooks = $db->prepare("UPDATE books SET BorrowedQuantity=BorrowedQuantity-1 WHERE ID=?");
+        $updateBooks->execute(array($bookId));
+
+        if($returnBook->rowCount()>0 && $transactionUpdate->rowCount()>0 && $updatedTransaction->rowCount()>0 && $updateBooks->rowCount()>0){
+            $_SESSION['status'] = "Successfully returned the book";
+            header("location:users.php");
+            exit();
+        }
+
+    }catch(PDOException $e) {
         $_SESSION['status'] = "Deletion of user failed: " . $e->getMessage();
         header("location:users.php");
         exit;

@@ -335,7 +335,7 @@
           if (typeof response === 'object') {
             // Access the properties of the response object
             $('#bookName').text('Book Name: ' + response['BookName']);
-            $('#bookIsbn').text('Book ISBN: ' + response['UserID']);
+            $('#bookIsbn').text('Book ISBN: ' + response['ISBN']);
             $('#borrowDate').text('Borrow Date: ' + response['TransactionDate']);
             $('#deadline').text('Deadline: ' + response['Deadline']);
             $('#lateDate').text('Late Date: ' + response['LateDate']);

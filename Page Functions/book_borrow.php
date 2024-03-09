@@ -58,8 +58,8 @@
 
         if($msg==""){
             try{
-                $transaction = $db->prepare("INSERT INTO transactions (BookID, UserID) VALUES(?,?)");
-                $transaction->execute(array($book,$id));
+                $transaction = $db->prepare("INSERT INTO transactions (BookID, UserID, Status) VALUES(?,?,?)");
+                $transaction->execute(array($book,$id,'1'));
 
                 $bQuantityUpdate = $db->prepare("UPDATE books SET BorrowedQuantity = BorrowedQuantity+1 WHERE ID=?");
                 $bQuantityUpdate->execute(array($book));
