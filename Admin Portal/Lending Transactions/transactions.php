@@ -3,7 +3,6 @@
     include_once "../admin_layout_start.php";
 ?>
 
-<!-- Button Trigger Model -->
 <section>
 
     <!-- Fetch Data From Database -->

@@ -3,87 +3,95 @@
     include_once "Common/inc_header.php";
 ?>
     <style>
-        .homeSec{
-            position:relative;
-            background-image:url("images/BG Image.jpg");
-            background-size:cover;
-            background-position:center;
-            height:90vh;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            color:white;
+        /* Landing CSS <---Start---> */
+
+        .landing {
+            background-image: url('images/BGImg.jpg');
+            height: 100vh;
+            background-position: center;
+            background-size: cover;
+            position: relative;
+            color: white;
         }
-        .homeSec::before{
-            content:'';
-            position:absolute;
-            top:0;
-            left:0;
-            width:100%;
-            height:100%;
-            background-color:rgba(0,0,0,0.7);
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
         }
-        .img{
-            position:absolute;
-            top:50%;
-            left:30%;
+
+        .search {
+            position: absolute;
+            top: 50%;
+            left: 50%;
             transform: translate(-50%, -50%);
-            z-index:1;
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
         }
-        .details{
-            position:absolute;
-            left:50%;
-            text-align:center;
-            z-index:1;
+
+        .search h1 {
+            margin-bottom: 20px;
+            font-size: 2.5em;
         }
-        .details h1{
-            font-size:45px;
+
+        .search p {
+            margin-bottom: 20px;
+            font-size: 1.2em;
         }
-        .details span{
-            font-size:25px;
-            color:var(--supportColor3);
+
+        .search form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
         }
-        .details form{
-            margin-top:50px;
-            display:flex;
-            padding:0 20px;
+
+        .search input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
         }
-        .details input{
-            width:70%;
-            margin:0 2px;
-            height:35px;
-            border-radius:10px 0 0 0;
-            border:none;
-            padding:0 20px;
-            color: var(--placeholder);
+
+        .search button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
-        .submit{
-            width:30% !important;
-            border-radius:0 0 10px 0 !important;
-            cursor:pointer;
-            background: var(--supportColor2);
-            color:var(--black) !important;
-            font-size:17px;
-            font-weight:500;
+
+        .search button:hover {
+            background-color: #45a049;
         }
+
+        /* Landing CSS <---End---> */
+
     </style>
 
-    <!-- Home Page Design <-Start->-->
+    <!-- Landing Page Design <-Start->-->
 
-    <section class="homeSec">
-        <div class="img">
-            <img src="images/Library Png.png" alt="Child with Books">
-        </div>
-        <div class="details">
-            <h1><span>Welcome to Our Library Management System</span><br>Connecting Readers and Resources</h1>
-            <form>
-                <input type="text" placeholder="Search Any Book">
-                <input class="submit" type="submit" value="Search">
+    <div class="landing">
+        <div class="overlay"></div>
+        <div class="search">
+            <h1>Welcome to Our Library</h1>
+            <p>Find your next book:</p>
+            <form action="">
+                <input type="text" placeholder="Seach books..." name="search">
+                <button type="submit">Search</button>
             </form>
         </div>
-    </section>
+    </div>
 
-    <!-- Home Page Design <-End->-->
+    <!-- Landing Page Design <-End->-->
 
-</body>
-</html>
+<!-- Include Footer -->
+<?php
+    include_once "Common/inc_footer.php";
+?>

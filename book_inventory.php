@@ -187,7 +187,9 @@
             ?>
 
             <div class="card">
-                <img src="Admin Portal/Manage Books/Images/<?php echo $row['Images']; ?>" alt="Book 1">
+                <a href="Page Functions/single_book_template.php?id=<?php echo $row['ID'] ?>">
+                    <img src="Admin Portal/Manage Books/Images/<?php echo $row['Images']; ?>" alt="Book 1">
+                </a>
                 <div class="details">
                     <h2><?php echo $row['BookName'] ?></h2>
                     <h3>(<?php echo $row['AuthorName'] ?>)</h3>
@@ -215,5 +217,7 @@
 
 <!-- Design Book Inventory Page <-End-> -->
 
-</body>
-</html>
+<!-- Include Footer -->
+<?php
+    include_once "Common/inc_footer.php";
+?>
