@@ -87,6 +87,39 @@
         font-size:16px;
         padding:10px 0;
     }
+
+    /* Media Quaries */
+
+    @media screen and (max-width:1160px) {
+        .card{
+            min-width:200px;
+        }
+    }
+    
+    @media screen and (max-width:960px) {
+        .contacts{
+            flex-direction:column;
+            /* align-items:center; */
+        }
+        .details{
+            width:100%;
+            justify-content:center;
+        }
+        .card{
+            width:200px;
+            min-width:100px;
+        }
+    }
+
+    @media screen and (max-width:530px) {
+        .text h1{
+            font-size:40px;
+        }
+        .form{
+            padding:20px 0 0 0;
+            width:80%;
+        }
+    }
 </style>
 
     <div class="contactUs">

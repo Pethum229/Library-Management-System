@@ -79,6 +79,43 @@
 
         /* register CSS <---End---> */
 
+        /* Media Query */
+        @media screen and (max-width:1000px) {
+            .register{
+                height:120vh;
+            }
+        }
+
+        @media screen and (max-width:880px) {
+            .registerImg img{
+                width:200px;
+                height:200px;
+            }
+        }
+
+        @media screen and (max-width:700px) {
+            .register{
+                height:180vh;
+            }
+            .registerSec{
+                flex-direction:column-reverse;
+            }
+            .registerForm{
+                width:90%;
+                margin-bottom:20px;
+                padding:0;
+            }
+        }
+
+        @media screen and (max-width:450px) {
+            .register{
+                height:200vh;
+            }
+            .registerSec{
+                width:80%;
+            }
+        }
+
     </style>
 
     <!-- register Page Design <-Start->-->

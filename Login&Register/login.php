@@ -78,6 +78,48 @@
 
         /* login CSS <---End---> */
 
+        @media screen and (max-width:900px) {
+            .loginSec{
+                padding:20px 0;
+            }
+            .loginImg img{
+                width:250px;
+                height:250px;
+            }
+        }
+
+        @media screen and (max-width:730px) {
+            .login{
+                height:140vh;
+            }
+            .loginSec{
+                flex-direction:column;
+            }
+            .loginForm{
+                width:90%;
+            }
+        }
+
+        @media screen and (max-width:530px) {
+            .login{
+                height:160vh;
+            }
+            .loginImg img{
+                width:150px;
+                height:150px;
+            }
+            .loginForm{
+                width:100%;
+                padding-left:20px;
+            }
+        }
+
+        @media screen and (max-width:400px) {
+            .loginSec{
+                width:90%;
+            }
+        }
+
     </style>
 
     <!-- login Page Design <-Start->-->
