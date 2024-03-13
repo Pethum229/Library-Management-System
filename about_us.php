@@ -96,6 +96,56 @@
     .card h3{
         margin-bottom:10px;
     }
+
+    /* Media Queries */
+    @media screen and (max-width:980px) {
+        .contacts{
+            flex-wrap:wrap;
+        }
+        .card{
+            width:350px;
+            margin-bottom:20px;
+        }
+    }
+
+    @media screen and (max-width:920px) {
+        .history{
+            flex-direction:column;
+        }
+        .mission{
+            flex-direction:column;
+        }
+        .missionDetails{
+            padding-left:0;
+            order:1;
+        }
+        .missionImg{
+            order:2;
+        }
+    }
+
+    @media screen and (max-width:520px) {
+        .text h1{
+            font-size:40px;
+        }
+        .historyImg img , .missionImg img{
+            width:300px;
+            height:300px;
+        }
+    }
+
+    @media screen and (max-width:380px){
+        .text h1{
+            font-size:35px;
+        }
+        .historyDetails{
+            padding-right:0;
+        }
+        .mission{
+            padding:0;
+        }
+    }
+
 </style>
 
     <div class="aboutUs">

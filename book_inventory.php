@@ -34,6 +34,11 @@
     .content{
         display:flex;
     }
+    .filterIcon i{
+        font-size:30px;
+        padding:30px 20px 0 20px;
+        display:none;
+    }
     .filter{
         width:25%;
         padding:20px 30px;
@@ -224,6 +229,41 @@
     .bookCardList .bookInfoList .borrowBtnList:hover {
         background-color: #45a049;
     }
+
+    /* Media Quaries */
+
+    @media screen and (max-width:1200px) {
+        .bookCardList{
+            margin:20px 20px;
+        }
+    }
+
+    @media screen and (max-width:1050px) {
+        .filter{
+            display:none;
+        }
+        .filterIcon i{
+            display:block;
+        }
+        .bookCardList{
+            margin:20px 20px;
+        }
+    }
+
+    @media screen and (max-width:910px) {
+        .bookCardList{
+            margin:20px 40px;
+        }
+        .text h1{
+            font-size:40px;
+        }
+    }
+
+    @media screen and (max-width:800px) {
+        .bookCardList{
+            margin:20px 20px;
+        }
+    }
 </style>
 
     <div class="inventory">
@@ -234,6 +274,7 @@
     </div>
 
     <section class="content">
+        <div class="filterIcon"><i class="fa-solid fa-filter"></i></div>
         <div class="filter">
             <h1>Filter Your Book</h1>
             <form>

@@ -89,6 +89,7 @@
             border-radius: 10px;
             overflow: hidden;
             display: flex;
+            align-items:center;
             margin: 20px;
             padding: 15px;
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
@@ -141,7 +142,52 @@
 
         /* Media Queries */
 
+        @media screen and (max-width:910px) {
+            .landing{
+                height:160vh
+            }
+            .bookCard{
+                flex-direction:column;
+            }
+        }
 
+        @media screen and (max-width:765px) {
+            .landing{
+                height:200vh;
+            }
+            .bookCard{
+                flex-direction:row;
+                width:350px;
+            }
+            .trending{
+                flex-direction:column;
+                align-items:center;
+            }
+            .search{
+                top:15%;
+            }
+        }
+
+        @media screen and (max-width:510px) {
+            .landing{
+                height:230vh;
+            }
+            .search{
+                top:20%;
+            }
+            .trendingBooks{
+                top:65%;
+            }
+            .search h1{
+                font-size:30px;
+            }
+        }
+
+        @media screen and (max-width:375px) {
+            .bookCard{
+                width:300px;
+            }
+        }
 
     </style>
 

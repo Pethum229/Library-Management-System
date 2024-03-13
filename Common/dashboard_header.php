@@ -12,7 +12,7 @@
     <title>Admin Portal</title>
     <style>
         body{
-            margin: 0;
+            margin: 0 auto;
             font-family: 'Courier New', Courier, monospace;
         }
         .sideMenus{
@@ -90,7 +90,7 @@
         }
 
         /* Media Queries */
-        
+
 
     </style>
 </head>

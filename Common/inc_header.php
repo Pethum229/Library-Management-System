@@ -41,6 +41,9 @@
         .menu a:hover, .logRegBtn a:hover {
             color: #FED766;
         }
+        .menuIcon{
+            display:none;
+        }
         .btn, .btnReg {
             padding: 5px 15px;
             border: 1px solid rgba(255, 255, 255, 0.3);
@@ -61,6 +64,34 @@
 
         /* Header CSS <---End---> */
 
+        /* Media Queries */
+        @media screen and (max-width: 950px) {
+            .menu {
+                display: none;
+            }
+            .menuIcon{
+                display:block;
+            }
+        }
+
+        @media screen and (max-width: 520px){
+            .navbar{
+                flex-direction:column;
+            }
+            .navbar a{
+                margin-bottom:10px;
+            }
+            .menuIcon{
+                margin-bottom:15px;
+            }
+        }
+
+        @media screen and (max-width:340px){
+            .logRegBtn a{
+                margin:0;
+            }
+        }
+
     </style>
 
 </head>
@@ -76,6 +107,7 @@
                     <a href="/Library-Management-System/book_inventory.php">Book Inventory</a>
                     <a href="/Library-Management-System/contact_us.php">Contact Us</a>
                 </div>
+                <div class="menuIcon"><i class="fa-solid fa-bars"></i></div>
                 <div class="logRegBtn">
                     <a href="/Library-Management-System/Login&Register/login.php" class="btn">Login</a>
                     <a href="/Library-Management-System/Login&Register/register.php" class="btn btnReg">Register</a>
