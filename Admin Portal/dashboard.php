@@ -1,49 +1,59 @@
 <?php
-include_once "admin_layout_start.php";
-include "../Common/db_connection.php";
-
-try {
-    // Fetch total number of books
-    $books = $db->prepare("SELECT COUNT(*) AS bookCount FROM books");
-    $books->execute();
-    $result = $books->fetch(PDO::FETCH_ASSOC);
-    $bookCount = $result['bookCount'] ?? 0;
-
-    // Fetch total number of users
-    $users = $db->prepare("SELECT COUNT(*) AS userCount FROM users");
-    $users->execute();
-    $result1 = $users->fetch(PDO::FETCH_ASSOC);
-    $userCount = $result1['userCount'] ?? 0;
-
-    // Fetch total number of transactions
-    $transactions = $db->prepare("SELECT COUNT(*) AS transactionCount FROM transactions");
-    $transactions->execute();
-    $result2 = $transactions->fetch(PDO::FETCH_ASSOC);
-    $transactionCount = $result2['transactionCount'] ?? 0;
-} catch (PDOException $e) {
-    // Handle database connection errors or query errors
-    echo "Database error: " . $e->getMessage();
-    die();
-}
+    include "../Common/dashboard_header.php";
 ?>
+    <style>
+        .cards{
+            display:flex;
+            justify-content:space-between;
+        }
+        .card{
+            text-align:center;
+            background: rgba(0, 0, 0, 0.0);
+            backdrop-filter: blur(5px);
+            border-radius:20px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            width:30%;
+            padding:20px 0;
+        }
+        .card h4{
+            font-size:20px;
+        }
+        .card h3{
+            font-size:35px;
+        }
+        .tables{
+          display:flex;
+          justify-content:space-between;
+          margin-top:30px;
+        }
+        .lastTransactions{
+          width:75%;
+          padding:0 10px;
+        }
+        .newUsers{
+          width:25%;
+          padding:0 10px;
+        }
+    </style>
 
-<section>
-    <div>
-        <div>
-            <h5>Total Books</h5>
-            <h3><?php echo htmlspecialchars($bookCount); ?></h3>
+
+
+    <div class="cards">
+        <div class="card">
+            <h4>Total Books</h4>
+            <h3>10</h3>
         </div>
-        <div>
-            <h5>Total Users</h5>
-            <h3><?php echo htmlspecialchars($userCount); ?></h3>
+        <div class="card">
+            <h4>Total Users</h4>
+            <h3>30</h3>
         </div>
-        <div>
-            <h5>Total Transactions</h5>
-            <h3><?php echo htmlspecialchars($transactionCount); ?></h3>
+        <div class="card">
+            <h4>Total Transactions</h4>
+            <h3>50</h3>
         </div>
     </div>
-    <div>
-        <div>
+    <div class="tables">
+        <div class="lastTransactions">
             <h2>Latest Transactions</h2>
             <table class="table table-bordered table-danger">
               <thead>
@@ -86,8 +96,8 @@ try {
               </tbody>
             </table>
         </div>
-        <div>
-            <h2>New Users</h2>
+        <div class="newUsers">
+          <h2>New Users</h2>
             <table class="table table-bordered table-danger">
               <thead>
                 <tr>
@@ -124,8 +134,7 @@ try {
             </table>
         </div>
     </div>
-</section>
 
 <?php
-include_once "admin_layout_end.php";
+    include "../Common/dashboard_footer.php";
 ?>

@@ -139,6 +139,10 @@
 
         /* Landing CSS <---End---> */
 
+        /* Media Queries */
+
+
+
     </style>
 
     <!-- Landing Page Design <-Start->-->

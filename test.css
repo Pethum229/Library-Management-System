@@ -1,251 +1,70 @@
-* {
+body{
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
 }
-
-body, html {
-    height: 100%;
-    font-family: 'Arial', sans-serif;
-    background-color: #f0f0f0;
-}
-
-.header {
-    width: 100%;
-    position: fixed;
+.sideMenu{
+    height:100%;
+    width:0;
+    position:fixed;
+    z-index:1;
     top: 0;
     left: 0;
-    z-index: 1000;
-    backdrop-filter: blur(5px);
-    background-color: rgba(255, 255, 255, 0.5); /* Adjust the opacity as needed */
+    background:#478cff;
+    overflow-x: hidden;
+    transition: .5s;
+    padding-top: 60px;
 }
-
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 50px; /* Adjust the padding as needed */
-    color: #fff;
-}
-
-.header .navbar .logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: white;
-}
-
-.header .navbar .menu a, .header .navbar .auth-buttons a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-    transition: color 0.3s ease;
-}
-
-.header .navbar .menu a:hover, .header .navbar .auth-buttons a:hover {
-    color: #FED766;
-}
-
-.header .navbar .auth-buttons .btn {
-    padding: 5px 15px;
-    background-color: rgba(255, 255, 255, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: white;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.header .navbar .auth-buttons .btn-primary {
-    background-color: rgba(255, 255, 255, 0.5);
-    color: #005A87;
-}
-
-.header .navbar .auth-buttons .btn:hover,
-.header .navbar .auth-buttons .btn-primary:hover {
-    background-color: rgba(255, 255, 255, 0.7);
-    color: #005A87;
-}
-
-.menu a, .auth-buttons a {
-    color: #fff;
-    text-decoration: none;
-    margin: 0 15px;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-.menu a:hover, .auth-buttons a:hover {
-    color: #4CAF50; /* Adjust hover color as needed */
-}
-
-.logo span {
-    color: #4CAF50; /* Adjust logo color as needed */
-}
-
-.btn {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.btn-primary {
-    background-color: #4CAF50; /* Adjust button background color as needed */
-    color: #fff;
-}
-
-.btn-primary:hover {
-    background-color: #45a049; /* Adjust button hover background color as needed */
-}
-
-
-
-
-.landing-page {
-    background-image: url('images/BGImg.jpg');
-    height: 100vh;
-    background-position: center;
-    background-size: cover;
-    position: relative;
-    color: white;
-}
-
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(5px);
-}
-
-.search-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.main-menu h2{
     text-align: center;
-    width: 90%;
-    max-width: 600px;
-}
-
-.search-container h1 {
-    margin-bottom: 20px;
-    font-size: 2.5em;
-}
-
-.search-container p {
-    margin-bottom: 20px;
-    font-size: 1.2em;
-}
-
-.search-container form {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-
-.search-container input[type="text"] {
-    width: 70%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-}
-
-.search-container button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #4CAF50;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.search-container button:hover {
-    background-color: #45a049;
-}
-
-
-
-
-
-
-.book-card {
-    background-color: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    border-radius: 10px;
-    overflow: hidden;
-    display: flex;
-    margin: 20px;
-    padding: 15px;
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    transition: transform 0.3s ease;
-}
-
-.book-card:hover {
-    transform: scale(1.05);
-}
-
-.book-card .book-image img {
-    width: 100px;
-    height: auto;
-    border-radius: 5px;
-}
-
-.book-card .book-info {
-    margin-left: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}
-
-.book-card .book-info .book-title, .book-card .book-info .author-name {
-    margin: 5px 0;
+    letter-spacing: 7px;
     color: #fff;
+    background:#111;
+    padding:20px 0;
+}
+.sideMenu a{
+    padding:8px 8px 8px 32px;
     text-decoration: none;
-    font-weight: bold;
+    color:#fff;
+    display: block;
+    transition:0.3s;
+    font-size:18px;
+    margin-bottom:20px;
+    text-transform:uppercase;
+    font-weight:bold;
 }
-
-.book-card .book-info .isbn, .book-card .book-info .remaining-count, .book-card .book-info .trending-status {
-    margin: 2px 0;
-    color: #ddd;
-    font-size: 0.9em;
+.sideMenu a i{
+    padding-right:15px;
 }
-
-.book-card .book-info .trending-status {
-    color: #ff4757;
-    font-weight: bold;
+.main-menu a:hover{
+    color:#fff;
+    background:#111;
 }
-
-.book-card .book-info .borrow-btn {
-    padding: 10px 15px;
-    background-color: #4CAF50;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
+.sideMenu .closebtn{
+    position:absolute;
+    top:0;
+    right:25px;
+    font-size:36px;
+    margin-left:50px;
 }
-
-.book-card .book-info .borrow-btn:hover {
-    background-color: #45a049;
+#content-area{
+    transition:margin-left .5s;
+    padding:16px;
 }
-/* Add this below the existing CSS */
-
-.trending-books h2 {
-    color: #333;
-    margin-bottom: 20px;
+.content-text{
+    padding:100px 180px;
+    text-align:center;
 }
-
-/* You can adjust or add the following styles to fit the new structure */
-
-.trending-books {
-    text-align: center;
-    padding: 40px 20px;
-    color: #fff; /* Ensures text is visible on the darker background */
+.content-text h2{
+    background: #478cff;
+    display:inline-block;
+    padding:15px 35px;
+    text-transform:uppercase;
+    font-size:50px;
+    color:#fff;
 }
-
-/* Ensure the rest of the CSS from previous messages is included, especially for .book-card */
-
+.content-text h3{
+    text-transform: uppercase;
+    font-size: 45px;
+    margin: 0;
+    letter-spacing: 3px;
+}

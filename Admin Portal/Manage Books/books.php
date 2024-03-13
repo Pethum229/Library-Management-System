@@ -1,9 +1,20 @@
-<!-- Insert Admin Layout Start -->
 <?php
-    include_once "../admin_layout_start.php";
+    include "../../Common/dashboard_header.php";
 ?>
+    <style>
+      .filters{
+        display:flex;
+        justify-content:space-between;
+        margin-bottom:20px;
+      }
+      .filter{
+        width:70%;
+      }
+      .filter input[type=text]{
+        width:60%;
+      }
+    </style>
 
-<!-- Button Trigger Model -->
 <section>
     <?php
       if(isset($_SESSION['status']) && $_SESSION['status']!=''){
@@ -19,9 +30,17 @@
       }
     ?>
 
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#insertData">
-      Add New Book
-    </button>
+    <div class="filters">
+      <div class="filter">
+        <form action="">
+          <input type="text" placeholder="Search Book">
+          <input type="submit" value="Filter">
+        </form>
+      </div>
+      <button type="button" class="btn btn-primary addBtn" data-bs-toggle="modal" data-bs-target="#insertData">
+        Add New Book
+      </button>
+    </div>
 
     <!-- Add New Book -->
 
@@ -218,10 +237,10 @@
 
 </section>
 
-<!-- Insert Admin Layout End -->
 <?php
-    include_once "../admin_layout_end.php";
+    include "../../Common/dashboard_footer.php";
 ?>
+
 
 <script>
 

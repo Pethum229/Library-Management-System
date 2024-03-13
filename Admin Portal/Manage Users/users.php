@@ -1,9 +1,27 @@
-<!-- Insert Admin Layout Start -->
 <?php
-    include_once "../admin_layout_start.php";
+    include "../../Common/dashboard_header.php";
 ?>
+    <style>
+      .filters{
+        display:flex;
+        justify-content:space-between;
+        margin-bottom:20px;
+      }
+      .filter{
+        width:70%;
+      }
+      .filter input[type=text]{
+        width:60%;
+      }
+      .filters button a{
+        text-decoration:none;
+        color:#fff;
+      }
+      .userList a{
+        margin:5px 0;
+      }
+    </style>
 
-<!-- Button Trigger Model -->
 <section>
     <?php
       if(isset($_SESSION['status']) && $_SESSION['status']!=''){
@@ -18,6 +36,18 @@
         unset($_SESSION['status']);
       }
     ?>
+
+    <div class="filters">
+      <div class="filter">
+        <form action="">
+          <input type="text" placeholder="Search Users">
+          <input type="submit" value="Filter">
+        </form>
+      </div>
+      <button type="button" class="btn btn-primary"><a href="../../Login&Register/register.php">
+        Add New User
+      </a></button>
+    </div>
 
     <!-- View Book Details Modal -->
 
@@ -185,7 +215,7 @@
 
               ?>
 
-              <tr>
+              <tr class="userList">
                 <td class="id"><?php echo $row['ID']; ?></td>
                 <td><?php echo $row['UserName']; ?></td>
                 <td><?php echo $row['Email']; ?></td>
@@ -216,10 +246,12 @@
 
 </section>
 
-<!-- Insert Admin Layout End -->
+
 <?php
-    include_once "../admin_layout_end.php";
+    include "../../Common/dashboard_footer.php";
 ?>
+
+
 
 <script>
 
@@ -354,3 +386,4 @@
 
 
 </script>
+

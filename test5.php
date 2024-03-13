@@ -1,5 +1,5 @@
 <?php
-    include "../Common/dashboard_header.php";
+    include "Common/dashboard_header.php";
 
     if(isset($_POST['chngPswd'])){
       $curPswd = $_POST['curPswd'];
@@ -40,7 +40,7 @@
         backdrop-filter: blur(5px);
         border-radius:20px;
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-        padding:20px 0 40px 0;
+        padding:20px 0;
       }
       .chngPwd form div{
         display:flex;
@@ -80,5 +80,7 @@
 
 
 <?php
-    include "../Common/dashboard_footer.php";
+    include "Common/dashboard_footer.php";
 ?>
+
+
