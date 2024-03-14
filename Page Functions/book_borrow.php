@@ -2,6 +2,7 @@
 session_start();
 // Check sessin is active
 if(!isset($_SESSION['role'])){
+    $_SESSION['status'] = "Please login before"
     header("location:../Login&Register/login.php");
 }
 
