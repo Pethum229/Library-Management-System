@@ -99,6 +99,10 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="fa-solid fa-xmark"></i></a>
         <div class="mainMenu">
             <h2>Library Management System</h2>
+            <?php
+                if($_SESSION['role']==1){
+            ?>
+
             <!-- Admin Dashboard -->
             <a href="/Library-Management-System/Admin Portal/dashboard.php"><i class="fa-solid fa-gauge"></i>Dashboard</a>
             <a href="/Library-Management-System/Admin Portal/Manage Books/books.php"><i class="fa-solid fa-book-open"></i>Books</a>
@@ -106,6 +110,10 @@
             <a href="/Library-Management-System/Admin Portal/Lending Transactions/transactions.php"><i class="fa-solid fa-hand-holding-hand"></i>Transactions</a>
             <a href="/Library-Management-System/Admin Portal/settings.php"><i class="fa-solid fa-gear"></i>Settings</a>
             <a href="/Library-Management-System/Login&Register/logout.php"><i class="fa-solid fa-right-from-bracket"></i>Log Out</a>
+
+            <?php
+                }elseif($_SESSION['role']==0){
+            ?>
             
             <!-- User Dashboard -->
             <a href="/Library-Management-System/User Dashboard/dashboard.php"><i class="fa-solid fa-gauge"></i>Dashboard</a>
@@ -114,12 +122,16 @@
             <a href="/Library-Management-System/USer Dashboard/settings.php"><i class="fa-solid fa-gear"></i>Settings</a>
             <a href="/Library-Management-System/Login&Register/logout.php"><i class="fa-solid fa-right-from-bracket"></i>Log Out</a>
 
+            <?php
+                }
+            ?>
+
         </div>
     </div>
     <div class="contentArea">
         <div class="header">
             <i class="fa-solid fa-bars" onclick="openNav()"></i>
-            <p>Hello! Pethum</p>
+            <p>Hello! <?php echo $_SESSION['name']; ?></p>
         </div>
 
         <div class="include">

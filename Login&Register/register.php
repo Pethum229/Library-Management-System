@@ -132,19 +132,19 @@
                     <form action="user_register.php" method="POST">
                         <div>
                             <label for="name">User Name</label>
-                            <input type="text" name="userName" id="name" placeholder="User Name">
+                            <input type="text" name="userName" required id="name" placeholder="User Name">
                         </div>
                         <div>
                             <label for="email">Email</label>
-                            <input type="text" name="email" id="email" placeholder="Email">
+                            <input type="text" name="email" required id="email" placeholder="Email">
                         </div>
                         <div>
                             <label for="password">Password</label>
-                            <input type="password" name="password" id="password" placeholder="Password">
+                            <input type="password" name="password" required id="password" placeholder="Password">
                         </div>
                         <div>
                             <label for="cPassword">Confirm Password</label>
-                            <input type="password" name="cPassword" id="cPassword" placeholder="Confirm Password">
+                            <input type="password" name="cPassword" required id="cPassword" placeholder="Confirm Password">
                         </div>
                         <button type="submit" name="register">SignUp</button>
                     </form>

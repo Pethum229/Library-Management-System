@@ -1,5 +1,10 @@
 <?php
-    session_start();
+session_start();
+// Check Login as a admin 
+if(!isset($_SESSION['role']) && $_SESSION['role']!=1){
+    header("location:../../Login&Register/login.php");
+}
+
 
     if(isset($_POST['click_view_btn'])){
         $id = $_POST['id'];

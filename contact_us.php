@@ -4,6 +4,8 @@
 ?>
 
 <style>
+
+    /* Contact Form Style <-Start-> */
     .contactUs{
         background-image:url('images/contacts.jpg');
         height: 300px;
@@ -88,6 +90,8 @@
         padding:10px 0;
     }
 
+    /* Contact Form Style <-End-> */
+
     /* Media Quaries */
 
     @media screen and (max-width:1160px) {
@@ -122,6 +126,7 @@
     }
 </style>
 
+    <!-- Contact Form Design <-Start-> -->
     <div class="contactUs">
         <div class="overlay"></div>
         <div class="text">
@@ -156,29 +161,30 @@
         </div>
         <div class="form">
             <h2>Send us anything!</h2>
-            <form action="">
+            <form action="Page Functions/contact_form.php" method="POST">
                 <div>
                     <label for="name">Name</label>
-                    <input type="text" id="name" placeholder="Pethum Priyashantha">
+                    <input type="text" maxlength="255" required id="name" name="name" placeholder="Pethum Priyashantha">
                 </div>
                 <div>
                     <label for="email">Email</label>
-                    <input type="text" id="email" placeholder="contact.pethum@gmail.com">
+                    <input type="text" required id="email" name="email" placeholder="contact.pethum@gmail.com">
                 </div>
                 <div>
                     <label for="subject">Subject</label>
-                    <input type="text" id="subject" placeholder="Subject of your problem or reason">
+                    <input type="text"  required id="subject" name="subject" maxlength="255" placeholder="Subject of your problem or reason">
                 </div>
                 <div>
                     <label for="message">Message</label>
-                    <textarea name="" placeholder="Type anything if you feel..." id="message" rows="8"></textarea>
+                    <textarea name="message" maxlength="999" required placeholder="Type anything if you feel..." id="message" rows="8"></textarea>
                 </div>
                 <div>
-                    <button type="submit">Send Us</button>
+                    <button type="submit" name="send">Send Us</button>
                 </div>
             </form>
         </div>
     </div>
+    <!-- Contact Form Design <-End-> -->
 
 <!-- Include Footer -->
 <?php

@@ -1,5 +1,6 @@
 <!-- Include Header -->
 <?php
+    session_start();
     include_once "../Common/inc_header.php";
 ?>
     <style>
@@ -133,11 +134,11 @@
                     <form action="user_login.php" method="POST">
                         <div>
                             <label for="email">Email</label>
-                            <input type="text" name="email" id="email" placeholder="Email">
+                            <input type="text" required name="email" id="email" placeholder="Email">
                         </div>
                         <div>
                             <label for="password">Password</label>
-                            <input type="password" name="password" id="password" placeholder="Password">
+                            <input type="password" required name="password" id="password" placeholder="Password">
                         </div>
                         <button type="submit" name="login">Login</button>
                     </form>

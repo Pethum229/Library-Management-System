@@ -1,5 +1,12 @@
 <?php
-    include "../Common/dashboard_header.php";
+include "../Common/dashboard_header.php";
+
+// Check Login as a admin 
+if(!isset($_SESSION['role']) && $_SESSION['role']!=1){
+  header("location:../Login&Register/login.php");
+}
+
+
 
     if(isset($_POST['chngPswd'])){
       $curPswd = $_POST['curPswd'];

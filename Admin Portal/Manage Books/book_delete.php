@@ -1,6 +1,12 @@
 <?php
 session_start();
 
+// Check Login as a admin 
+if(!isset($_SESSION['role']) && $_SESSION['role']!=1){
+    header("location:../../Login&Register/login.php");
+}
+
+
 if(isset($_POST['deleteBook'])){
     $isbn = $_POST['isbn'];
 

@@ -1,5 +1,11 @@
 <?php
-    include "../Common/dashboard_header.php";
+include "../Common/dashboard_header.php";
+
+// Check Login as a admin 
+if(!isset($_SESSION['role']) && $_SESSION['role']!=1){
+  header("location:../Login&Register/login.php");
+}
+
 ?>
     <style>
         .cards{
@@ -36,20 +42,41 @@
         }
     </style>
 
+    <?php
+      // DB Operations
+      include_once "../Common/db_connection.php";
 
+      // Get Book Count
+      $books = $db->prepare("SELECT COUNT(*) AS totalBooks FROM books");
+      $books->execute();
+      $result = $books->fetch(PDO::FETCH_ASSOC);
+      $bookCount = $result['totalBooks'];
+      
+      // Get User Count
+      $users = $db->prepare("SELECT COUNT(*) AS totalUsers FROM users");
+      $users->execute();
+      $result1 = $users->fetch(PDO::FETCH_ASSOC);
+      $userCount = $result1['totalUsers'];
+
+      // Get Transaction Count
+      $transactions = $db->prepare("SELECT COUNT(*) AS totalTransactions FROM transactions");
+      $transactions->execute();
+      $result2 = $transactions->fetch(PDO::FETCH_ASSOC);
+      $transactionCount = $result2['totalTransactions'];
+    ?>
 
     <div class="cards">
         <div class="card">
             <h4>Total Books</h4>
-            <h3>10</h3>
+            <h3><?php echo $bookCount ?></h3>
         </div>
         <div class="card">
             <h4>Total Users</h4>
-            <h3>30</h3>
+            <h3><?php echo $userCount ?></h3>
         </div>
         <div class="card">
             <h4>Total Transactions</h4>
-            <h3>50</h3>
+            <h3><?php echo $transactionCount ?></h3>
         </div>
     </div>
     <div class="tables">

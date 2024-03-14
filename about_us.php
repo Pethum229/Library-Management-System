@@ -4,6 +4,9 @@
 ?>
 
 <style>
+
+     /* About Us Page Styles <-Start-> */
+
     .aboutUs{
         background-image:url('images/AboutUs.jpg');
         height: 300px;
@@ -97,6 +100,8 @@
         margin-bottom:10px;
     }
 
+    /* About Us Page Styles <-End-> */
+
     /* Media Queries */
     @media screen and (max-width:980px) {
         .contacts{
@@ -147,6 +152,8 @@
     }
 
 </style>
+
+    <!-- About Us Page Design <-Start-> -->
 
     <div class="aboutUs">
         <div class="overlay"></div>
@@ -203,6 +210,9 @@
             <p>Weekends : 9.00AM - 1.00PM</p>
         </div>
     </div>
+
+    <!-- About Us Page Design <-End-> -->
+
 
 <!-- Include Footer -->
 <?php

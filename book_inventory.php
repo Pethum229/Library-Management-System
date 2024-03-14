@@ -1,9 +1,19 @@
 <!-- Include Header -->
 <?php
     include_once "Common/inc_header.php";
+
+    // Clear All Filters
+
+    if(isset($_GET['clear'])){
+        header("Location: {$_SERVER['PHP_SELF']}");
+        exit;
+    }
 ?>
 
 <style>
+
+    /* Book Inventory Styles <-Start-> */
+
     .inventory{
         background-image:url('images/Books.jpg');
         height: 200px;
@@ -230,6 +240,8 @@
         background-color: #45a049;
     }
 
+    /* Book Inventory Styles <-End-> */
+
     /* Media Quaries */
 
     @media screen and (max-width:1200px) {
@@ -266,6 +278,8 @@
     }
 </style>
 
+    <!-- Book Inventory Design <-Start-> -->
+
     <div class="inventory">
         <div class="overlay"></div>
         <div class="text">
@@ -277,18 +291,18 @@
         <div class="filterIcon"><i class="fa-solid fa-filter"></i></div>
         <div class="filter">
             <h1>Filter Your Book</h1>
-            <form>
+            <form method="GET">
                 <div class="searchBar">
                     <h4>Search Book Name/ Author</h4>
-                    <input id="bookName" type="text" placeholder="Search Book">
+                    <input id="bookName" type="text" name="search" value="<?php echo isset($_GET['search']) ? $_GET['search'] : '' ?>" placeholder="Search Book">
                 </div>
                 <hr>
                 <div class="availability">
                     <h4>Availability</h4>
                     <div>
-                        <input name="stock" type="radio" id="inStock">
+                        <input name="stock" value="1" <?php echo isset($_GET['stock']) && $_GET['stock'] == 1 ? 'checked' : '' ?> type="radio" id="inStock">
                         <label for="inStock">In Stock</label>
-                        <input name="stock" type="radio" id="outStock">
+                        <input name="stock" value="0" <?php echo isset($_GET['stock']) && $_GET['stock'] == 0 ? 'checked' : '' ?> type="radio" id="outStock">
                         <label for="outStock">Out of Stock</label>
                     </div>
                 </div>
@@ -296,27 +310,27 @@
                 <div class="genere">
                     <h4>Filter by Genere</h4>
                     <div>
-                        <input type="checkbox" id="g1">
+                        <input name="action" value="Action" <?php echo isset($_GET['action']) ? 'checked' : '' ?> type="checkbox" id="g1">
                         <label for="g1">Action</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="g2">
+                        <input name="adventure" value="Adventure" <?php echo isset($_GET['adventure']) ? 'checked' : '' ?> type="checkbox" id="g2">
                         <label for="g2">Adventure</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="g3">
+                        <input name="mystry" value="Mystry" <?php echo isset($_GET['mystry']) ? 'checked' : '' ?> type="checkbox" id="g3">
                         <label for="g3">Mystry</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="g4">
+                        <input name="fairyTales" value="Fairy Tales" <?php echo isset($_GET['fairyTales']) ? 'checked' : '' ?> type="checkbox" id="g4">
                         <label for="g4">Fairy Tales</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="g5">
+                        <input name="horror" value="Horror" <?php echo isset($_GET['horror']) ? 'checked' : '' ?> type="checkbox" value="Horror" id="g5">
                         <label for="g5">Horror</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="g6">
+                        <input name="knowladgable" value="Knowladgable" <?php echo isset($_GET['knowladgable']) ? 'checked' : '' ?> type="checkbox" id="g6">
                         <label for="g6">Knowladgable</label>
                     </div>
                 </div>
@@ -324,60 +338,160 @@
                 <div class="date">
                     <h4>Sort By Date</h4>
                     <div>
-                        <input name="date" type="radio" id="oldest">
+                        <input name="date" value="desc" <?php echo isset($_GET['date']) && $_GET['date'] == "desc" ? 'checked' : '' ?> type="radio" id="oldest">
                         <label for="oldest">Oldest</label>
-                        <input name="date" type="radio" id="lastest">
+                        <input name="date" value="asc"  <?php echo isset($_GET['date']) && $_GET['date'] == "asc" ? 'checked' : '' ?> type="radio" id="lastest">
                         <label for="lastest">Lastest</label>
                     </div>
                 </div>
                 <hr>
                 <div class="buttons">
-                    <input type="submit" value="Add Filters">
-                    <input type="reset" value="Clear Filters">
+                    <input type="submit" name="searchBtn" value="Add Filters">
+                    <input type="submit" name="clear" value="Clear Filters">
                 </div>
                 <hr>
                 <div class="trending">
                     <h4>Trending Books</h4>
-                    <div class="bookCard">
-                        <div class="bookImaget">
-                            <a href="#"><img src="images/3.jpg" alt="Book Name"></a>
+
+                    <!-- Fetch Trending Books -->
+
+                    <?php
+                        include_once "Common/db_connection.php";
+
+                        $itemCount=0; //For limit book count
+
+                        $fetchBooks = $db->prepare("SELECT * FROM books");
+                        $fetchBooks->execute();
+
+                        if($fetchBooks->rowCount() > 0){
+                          while($row=$fetchBooks -> fetch (PDO::FETCH_ASSOC)){
+                        
+                            $allQuantity = $row['Quantity'];
+                            $borrowedQuantity = $row['BorrowedQuantity'];
+                            $avaliability = $allQuantity - $borrowedQuantity;
+                            $trending = ($borrowedQuantity/$allQuantity)*100;
+                        
+                            // Get Trending Items and Limit it to 5 items
+                            if($trending>=75){
+                                $itemCount = $itemCount+1;
+                                if($itemCount<=5){
+                            
+                    ?>
+   
+                        <div class="bookCard">
+                            <div class="bookImaget">
+                                <a href="Page Functions/single_book_template.php?id=<?php echo $row['ID'] ?>">
+                                    <img src="Admin Portal/Manage Books/Images/<?php echo $row['Images']; ?>" alt="Book Name">
+                                </a>
+                            </div>
+                            <div class="bookInfo">
+                                <a href="Page Functions/single_book_template.php?id=<?php echo $row['ID'] ?>" class="bookTitle"><?php echo $row['BookName'] ?></a>
+                                <p class="authorName"><?php echo $row['AuthorName'] ?></p>
+                            </div>
                         </div>
-                        <div class="bookInfo">
-                            <a href="#" class="bookTitle">Book : </a>
-                            <p class="authorName">Author : </p>
-                        </div>
-                    </div>
-                    <div class="bookCard">
-                        <div class="bookImaget">
-                            <a href="#"><img src="images/3.jpg" alt="Book Name"></a>
-                        </div>
-                        <div class="bookInfo">
-                            <a href="#" class="bookTitle">Book : </a>
-                            <p class="authorName">Author : </p>
-                        </div>
-                    </div>
-                    <div class="bookCard">
-                        <div class="bookImaget">
-                            <a href="#"><img src="images/3.jpg" alt="Book Name"></a>
-                        </div>
-                        <div class="bookInfo">
-                            <a href="#" class="bookTitle">Book : </a>
-                            <p class="authorName">Author : </p>
-                        </div>
-                    </div>
+                        
+                        
+                    <?php
+                                }
+                            }
+                        }
+                    }
+                    ?>
                 </div>
             </form>
         </div>
+
+        <!-- Book Card Design <-Start->-->
+
         <div class="books">
+
+            <!-- Fetch books from database -->
             
             <?php
                 include_once "Common/db_connection.php";
 
-                $fetchBooks = $db->prepare("SELECT * FROM books");
-                $fetchBooks->execute(array());
+                $selectQuery = "SELECT * FROM books";
+                $parameters = array();
+                
+                // Check if search query is provided
+                if(isset($_GET['homeBookSearch']) && !empty($_GET['homeSearch'])) {
+                    $book = $_GET['homeSearch'];
+                    $searchTerm = "%$book%";
+                    $selectQuery .= " WHERE BookName LIKE ? OR AuthorName LIKE ?";
+                    $parameters[] = $searchTerm;
+                    $parameters[] = $searchTerm;
+                }
+                
+                // Check if search button is clicked
+                if(isset($_GET['searchBtn'])) {
+                    $selectQuery .= " WHERE 1=1";
+                
+                    // Check if search term is provided
+                    if(isset($_GET['search'])) {
+                        $book = $_GET['search'];
+                        $searchTerm = "%$book%";
+                        $selectQuery .= " AND (BookName LIKE ? OR AuthorName LIKE ?)";
+                        $parameters[] = $searchTerm;
+                        $parameters[] = $searchTerm;
+                    }
+                
+                    // Check if stock filter is applied
+                    if(isset($_GET['stock'])) {
+                        $stock = $_GET['stock'];
+                        if($stock == 1) {
+                            $selectQuery .= " AND (Quantity - BorrowedQuantity) > 0";
+                        } else {
+                            $selectQuery .= " AND (Quantity - BorrowedQuantity) = 0";
+                        }
+                    }
+                
+                    // Check if genre filter is applied
+                    if(isset($_GET['action'])) {
+                        $genre = $_GET['action'];
+                        $selectQuery .= " AND Genre = ?";
+                        $parameters[] = $genre;
+                    }
+                    if(isset($_GET['adventure'])) {
+                        $genre = $_GET['adventure'];
+                        $selectQuery .= " AND Genre = ?";
+                        $parameters[] = $genre;
+                    }
+                    if(isset($_GET['mystry'])) {
+                        $genre = $_GET['mystry'];
+                        $selectQuery .= " AND Genre = ?";
+                        $parameters[] = $genre;
+                    }
+                    if(isset($_GET['fairyTales'])) {
+                        $genre = $_GET['fairyTales'];
+                        $selectQuery .= " AND Genre = ?";
+                        $parameters[] = $genre;
+                    }
+                    if(isset($_GET['horror'])) {
+                        $genre = $_GET['horror'];
+                        $selectQuery .= " AND Genre = ?";
+                        $parameters[] = $genre;
+                    }
+                    if(isset($_GET['knowladgable'])) {
+                        $genre = $_GET['knowladgable'];
+                        $selectQuery .= " AND Genre = ?";
+                        $parameters[] = $genre;
+                    }
+                
+                    // Check if order by date is applied
+                    if(isset($_GET['date'])) {
+                        $order = $_GET['date'];
+                        $selectQuery .= " ORDER BY ID $order";
+                    }
+                }
+                
+                $fetchBooks = $db->prepare($selectQuery);
+                $fetchBooks->execute($parameters);
+                
       
                 if($fetchBooks->rowCount() > 0){
                   while($row=$fetchBooks -> fetch (PDO::FETCH_ASSOC)){
+
+                    // Add features like trending books and etc
 
                     $allQuantity = $row['Quantity'];
                     $borrowedQuantity = $row['BorrowedQuantity'];
@@ -388,11 +502,11 @@
             <div class="bookCardList">
                 <div class="bookImageList">
                     <a href="Page Functions/single_book_template.php?id=<?php echo $row['ID'] ?>">
-                        <img src="Admin Portal/Manage Books/Images/<?php echo $row['Images']; ?>" alt="Book 1">
+                        <img src="Admin Portal/Manage Books/Images/<?php echo $row['Images']; ?>" alt="Book Image">
                     </a>
                 </div>
                 <div class="bookInfoList">
-                    <a href="#" class="bookTitleList"><?php echo $row['BookName'] ?></a>
+                    <a href="Page Functions/single_book_template.php?id=<?php echo $row['ID'] ?>" class="bookTitleList"><?php echo $row['BookName'] ?></a>
                     <p class="authorNameList"><?php echo $row['AuthorName'] ?></p>
                     <p class="isbnList"><?php echo $row['ISBN'] ?></p>
                     <p class="remainingCountList"><?php if($avaliability<10 && $avaliability!=0) echo $avaliability." more books only avaliable";?></p>
@@ -401,8 +515,8 @@
                 if($avaliability==0){
                     echo "<button class='borrowBtnList' style='background:red'>Not Avaliable</button>";
                 }else{
-                    $book = $row['ID'];
-                    echo "<button class='borrowBtnList' ><a href='Page Functions/book_borrow.php?book=$book'>Borrow</a></button>";
+                    $books = $row['ID'];
+                    echo "<button class='borrowBtnList' ><a href='Page Functions/book_borrow.php?book=$books'>Borrow</a></button>";
                 }
                 ?>
                 </div>
@@ -410,11 +524,17 @@
 
             <?php
                 }
+            }else{
+                $_SESSION['status'] = "No books related to your search";
             }
             ?>
 
         </div>
+
+        <!-- Book Card Design <-End->-->
     </section>
+
+    <!-- Book Inventory Design <-End-> -->
 
 <!-- Include Footer -->
 <?php

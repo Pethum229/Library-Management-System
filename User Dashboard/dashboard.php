@@ -1,5 +1,12 @@
 <?php
+
 include "../Common/dashboard_header.php";
+
+// Check sessin is active
+if(!isset($_SESSION['role'])){
+  header("location:../Login&Register/login.php");
+}
+
 ?>
 
 <style>

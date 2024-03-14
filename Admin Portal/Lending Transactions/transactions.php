@@ -1,5 +1,12 @@
 <?php
     include "../../Common/dashboard_header.php";
+    
+    // Check Login as a admin 
+    if(!isset($_SESSION['role']) && $_SESSION['role']!=1){
+      header("location:../../Login&Register/login.php");
+    }
+
+
 ?>
     <style>
       .filters{
@@ -33,23 +40,6 @@
     </style>
 
 <section>
-
-    <div class="filters">
-      <div class="filter">
-        <form action="">
-          <input type="text" placeholder="Search Book or User">
-          <div>
-            <input type="radio" id="returned">
-            <label for="returned">Returned</label>
-          </div>
-          <div>
-            <input type="radio" id="nReturned">
-            <label for="nReturned">Not Returned</label>
-          </div>
-          <input type="submit" value="Filter">
-        </form>
-      </div>
-    </div>
 
     <!-- Fetch Data From Database -->
 

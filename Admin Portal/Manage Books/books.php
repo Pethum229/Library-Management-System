@@ -1,5 +1,16 @@
 <?php
-    include "../../Common/dashboard_header.php";
+include "../../Common/dashboard_header.php";
+
+// Check Login as a admin 
+if(!isset($_SESSION['role']) && $_SESSION['role']!=1){
+  header("location:../../Login&Register/login.php");
+}
+
+if(isset($_GET['clear'])){
+  header("Location: {$_SERVER['PHP_SELF']}");
+  exit;
+}
+
 ?>
     <style>
       .filters{
@@ -32,9 +43,10 @@
 
     <div class="filters">
       <div class="filter">
-        <form action="">
-          <input type="text" placeholder="Search Book">
-          <input type="submit" value="Filter">
+        <form action="" method="GET">
+          <input type="text" name="book" placeholder="Search Book">
+          <input type="submit" name="search" value="Filter">
+          <input type="submit" name="clear" value="Clear Filters">
         </form>
       </div>
       <button type="button" class="btn btn-primary addBtn" data-bs-toggle="modal" data-bs-target="#insertData">
@@ -54,28 +66,35 @@
           <form action="book_add.php" method="POST" enctype="multipart/form-data">
             <div class="modal-body">
               <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="bookName" placeholder="Book Name">
+                  <input type="text" class="form-control" requireed name="bookName" placeholder="Book Name">
               </div>
               <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="authorName" placeholder="Author Name">
+                  <input type="text" class="form-control" requireed name="authorName" placeholder="Author Name">
               </div>
               <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="ISBN" placeholder="ISBN">
+                  <input type="text" class="form-control" requireed name="ISBN" placeholder="ISBN">
               </div>
               <div class="form-group mb-3">
-                  <input type="number" class="form-control" name="quantity" placeholder="Quantity">
+                  <input type="number" class="form-control" requireed name="quantity" placeholder="Quantity">
               </div>
               <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="publicYear" placeholder="Publication Year">
+                  <input type="text" class="form-control" requireed name="publicYear" placeholder="Publication Year">
               </div>
               <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="genre" placeholder="Genre">
+                  <select class="form-control" id="genre" requireed name="genre">
+                    <option value="Action">Action</option>
+                    <option value="Adventure">Adventure</option>
+                    <option value="Mystry">Mystry</option>
+                    <option value="Fairy Tales">Fairy Tales</option>
+                    <option value="Horror">Horror</option>
+                    <option value="Knowladgable">Knowladgable</option>
+                  </select>
               </div>
               <div class="form-group mb-3">
-                  <input type="text" class="form-control" name="summary" placeholder="Summary">
+                  <input type="text" class="form-control" requireed name="summary" placeholder="Summary">
               </div>
               <div class="form-group mb-3">
-                  <input type="file" class="form-control" name="image">
+                  <input type="file" class="form-control" requireed name="image">
               </div>
             </div>
             <div class="modal-footer">
@@ -137,7 +156,14 @@
                   <input type="text" class="form-control" id="publicYear" name="publicYear" placeholder="Publication Year">
               </div>
               <div class="form-group mb-3">
-                  <input type="text" class="form-control" id="genre" name="genre" placeholder="Genre">
+                  <select class="form-control" id="genre" name="genre">
+                    <option value="Action">Action</option>
+                    <option value="Adventure">Adventure</option>
+                    <option value="Mystry">Mystry</option>
+                    <option value="Fairy Tales">Fairy Tales</option>
+                    <option value="Horror">Horror</option>
+                    <option value="Knowladgable">Knowladgable</option>
+                  </select>
               </div>
               <div class="form-group mb-3">
                   <input type="text" class="form-control" id="summary" name="summary" placeholder="Summary">
@@ -198,11 +224,23 @@
         <?php
           include_once "../../Common/db_connection.php";
 
-          $fetchBooks = $db->prepare("SELECT * FROM books");
-          $fetchBooks->execute(array());
+          $fetchBooks = "SELECT * FROM books";
+          $parameters = [];
 
-          if($fetchBooks->rowCount() > 0){
-            while($row=$fetchBooks -> fetch (PDO::FETCH_ASSOC)){
+          if(isset($_GET['book'])){
+            $bookName = $_GET['book'];
+            $searchQuery = "%$bookName%";
+
+            $fetchBooks .= " WHERE BookName LIKE ? OR AuthorName LIKE ?";
+            $parameters[] = $searchQuery;
+            $parameters[] = $searchQuery;
+          }
+
+          $filtered = $db->prepare($fetchBooks);
+          $filtered->execute($parameters);
+
+          if($filtered->rowCount() > 0){
+            while($row=$filtered -> fetch (PDO::FETCH_ASSOC)){
 
               $allQuantity = $row['Quantity'];
               $borrowedQuantity = $row['BorrowedQuantity'];
@@ -292,7 +330,7 @@
           // console.log(response);
 
           $.each(response, function(Key, value){
-            // console.log(value['BookName']);
+            // console.log(value['Genre']);
 
             $('#bookName').val(value['BookName']);
             $('#authorName').val(value['AuthorName']);

@@ -119,7 +119,21 @@
     <div class="experience">
         <h2>Give us your experience about this book</h2>
         <form action="feedbacks.php" method="POST">
-            <textarea name="" id="" cols="5" rows="5" placeholder="Write if anything about this book"></textarea>
+            <div>
+                <label for="rateBook">Rate Book</label>
+                <select name="" id="rateBook">
+                    <option value="0">Select Ratings</option>
+                    <option value="1">01 Star</option>
+                    <option value="2">02 Star</option>
+                    <option value="3">03 Star</option>
+                    <option value="4">04 Star</option>
+                    <option value="5">05 Star</option>
+                </select>
+            </div>
+            <div>
+                <label for="feedback">Give your idea about book</label>
+                <textarea name="" id="" cols="5" rows="5" placeholder="Write anything about this book"></textarea>
+            </div>
             <input type="submit" value="Send Feedback">
         </form>
     </div>

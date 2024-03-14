@@ -92,6 +92,7 @@
             align-items:center;
             margin: 20px;
             padding: 15px;
+            min-width:350px;
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
             border: 1px solid rgba(255, 255, 255, 0.18);
             transition: transform 0.3s ease;
@@ -141,6 +142,12 @@
         /* Landing CSS <---End---> */
 
         /* Media Queries */
+
+        @media screen and (max-width:1150px) {
+            .bookCard{
+                min-width:220px;
+            }
+        }
 
         @media screen and (max-width:910px) {
             .landing{
@@ -198,9 +205,9 @@
         <div class="search">
             <h1>Welcome to Our Library</h1>
             <p>Find your next book:</p>
-            <form action="">
-                <input type="text" placeholder="Seach books..." name="search">
-                <button type="submit">Search</button>
+            <form action="book_inventory.php" method="GET">
+                <input type="text" placeholder="Search books..." name="homeSearch">
+                <button type="submit" name="homeBookSearch">Search</button>
             </form>
         </div>
 
@@ -209,45 +216,65 @@
         <div class="trendingBooks">
             <h2>Trending Books</h2>
             <div class="trending">
+
+            <!-- Fetch Trending Books to Home Page <-Start-> -->
+            
+            <?php
+                include_once "Common/db_connection.php";
+
+                $itemCount = 0; //For limit book count
+
+                $fetchBooks = $db->prepare("SELECT * FROM books");
+                $fetchBooks->execute();
+      
+                if($fetchBooks->rowCount() > 0){
+                  while($row=$fetchBooks -> fetch (PDO::FETCH_ASSOC)){
+
+                    $allQuantity = $row['Quantity'];
+                    $borrowedQuantity = $row['BorrowedQuantity'];
+                    $avaliability = $allQuantity - $borrowedQuantity;
+                    $trending = ($borrowedQuantity/$allQuantity)*100;
+
+                    // Get Trending Items and Limit it to 3 items
+                    if($trending>=75){
+                        $itemCount = $itemCount+1;
+                        if($itemCount<=3){
+            ?>
+
+
                 <div class="bookCard">
                     <div class="bookImage">
-                        <a href="#"><img src="images/1.jpg" alt="Book Name"></a>
+                        <a href="Page Functions/single_book_template.php?id=<?php echo $row['ID'] ?>">
+                            <img src="Admin Portal/Manage Books/Images/<?php echo $row['Images']; ?>" alt="Book Name">
+                        </a>
                     </div>
                     <div class="bookInfo">
-                        <a href="#" class="bookTitle">Book Name</a>
-                        <p class="authorName">Author Name</p>
-                        <p class="isbn">ISBN Number: 1234567890</p>
-                        <p class="remainingCount">Remaining: 5</p>
+                        <a href="Page Functions/single_book_template.php?id=<?php echo $row['ID'] ?>" class="bookTitle"><?php echo $row['BookName'] ?></a>
+                        <p class="authorName"><?php echo $row['AuthorName'] ?></p>
+                        <p class="isbn"><?php echo $row['ISBN'] ?></p>
+                        <p class="remainingCount"><?php if($avaliability<10 && $avaliability!=0) echo $avaliability." more books only avaliable";?></p>
                         <p class="trendingStatus">Trending!</p>
-                        <button class="borrowBtn">Borrow</button>
+                        <?php
+                    if($avaliability==0){
+                        echo "<button class='borrowBtnList' style='background:red'>Not Avaliable</button>";
+                    }else{
+                        $book = $row['ID'];
+                        echo "<button class='borrowBtnList'><a href='Page Functions/book_borrow.php?book=$book'>Borrow</a></button>";
+                    }
+                    ?>
                     </div>
                 </div>
-                <div class="bookCard">
-                    <div class="bookImage">
-                        <a href="#"><img src="images/2.jpg" alt="Book Name"></a>
-                    </div>
-                    <div class="bookInfo">
-                        <a href="#" class="bookTitle">Book Name</a>
-                        <p class="authorName">Author Name</p>
-                        <p class="isbn">ISBN Number: 1234567890</p>
-                        <p class="remainingCount">Remaining: 5</p>
-                        <p class="trendingStatus">Trending!</p>
-                        <button class="borrowBtn">Borrow</button>
-                    </div>
-                </div>
-                <div class="bookCard">
-                    <div class="bookImage">
-                        <a href="#"><img src="images/3.jpg" alt="Book Name"></a>
-                    </div>
-                    <div class="bookInfo">
-                        <a href="#" class="bookTitle">Book Name</a>
-                        <p class="authorName">Author Name</p>
-                        <p class="isbn">ISBN Number: 1234567890</p>
-                        <p class="remainingCount">Remaining: 5</p>
-                        <p class="trendingStatus">Trending!</p>
-                        <button class="borrowBtn">Borrow</button>
-                    </div>
-                </div>
+                
+
+            <?php
+                        }
+                    }
+                }
+            }
+            ?>
+
+            <!-- Fetch Trending Books to Home Page <-End-> -->
+
             </div>
         </div>
     </div>

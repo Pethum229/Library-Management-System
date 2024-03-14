@@ -1,5 +1,16 @@
 <?php
-    include "../../Common/dashboard_header.php";
+include "../../Common/dashboard_header.php";
+
+// Check Login as a admin 
+if(!isset($_SESSION['role']) && $_SESSION['role']!=1){
+  header("location:../../Login&Register/login.php");
+}
+
+if(isset($_GET['clear'])){
+  header("Location: {$_SERVER['PHP_SELF']}");
+  exit;
+}
+
 ?>
     <style>
       .filters{
@@ -39,9 +50,10 @@
 
     <div class="filters">
       <div class="filter">
-        <form action="">
-          <input type="text" placeholder="Search Users">
-          <input type="submit" value="Filter">
+        <form action="" method="GET">
+          <input type="text" name="user" placeholder="Search Users">
+          <input type="submit" name="filter" value="Filter">
+          <input type="submit" name="clear" value="Clear Filters">
         </form>
       </div>
       <button type="button" class="btn btn-primary"><a href="../../Login&Register/register.php">
@@ -192,11 +204,23 @@
         <?php
           include_once "../../Common/db_connection.php";
 
-          $fetchUsers = $db->prepare("SELECT * FROM users");
-          $fetchUsers->execute(array());
+          $fetchUsers = "SELECT * FROM users";
+          $parameters=[];
 
-          if($fetchUsers->rowCount() > 0){
-            while($row=$fetchUsers -> fetch (PDO::FETCH_ASSOC)){
+          if(isset($_GET['user'])){
+            $userName = $_GET['user'];
+            $searchTerm = "%$userName%";
+
+            $fetchUsers .= " WHERE UserName LIKE ? OR Email LIKE ?";
+            $parameters[] = $searchTerm;
+            $parameters[] = $searchTerm;
+          }
+
+          $filtered = $db->prepare($fetchUsers);
+          $filtered->execute($parameters);
+
+          if($filtered->rowCount() > 0){
+            while($row=$filtered -> fetch (PDO::FETCH_ASSOC)){
 
                 $todayDate = date('Y-m-d');
 

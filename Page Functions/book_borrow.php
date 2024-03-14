@@ -1,5 +1,10 @@
 <?php
-    session_start();
+session_start();
+// Check sessin is active
+if(!isset($_SESSION['role'])){
+    header("location:../Login&Register/login.php");
+}
+
 
     if(isset($_GET['book']) && !empty($_GET['book'])){
         $book = $_GET['book'];
